@@ -18,7 +18,6 @@ public class Trade {
     @Column(name = "id", nullable = false)
     private Long id;
     @Column
-
     Integer tradeId;
     @Column
     String account;
@@ -67,5 +66,6 @@ public class Trade {
     public Trade() {
 
     }
+
     // TODO: Map columns in data table TRADE with corresponding java fields
 }
