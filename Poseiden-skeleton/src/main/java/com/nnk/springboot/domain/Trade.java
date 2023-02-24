@@ -60,5 +60,12 @@ public class Trade {
     String sourceListId;
     @Column
     String side;
+
+    public Trade(String tradeAccount, String type) {
+    }
+
+    public Trade() {
+
+    }
     // TODO: Map columns in data table TRADE with corresponding java fields
 }

@@ -63,5 +63,8 @@ public class BidList {
     String sourceListId;
     @Column
     String side;
+
+    public BidList(String account, String type, double bidQuantity) {
+    }
     // TODO: Map columns in data table BIDLIST with corresponding java fields
 }

@@ -187,17 +187,3 @@ i
 9.idea/libraries/Maven__org_xmlunit_xmlunit_core_2_5_1.xml,7\6\76bdc37d55d087980ee12b8a8b60393cc92667e5
 d
 4Poseiden-skeleton/src/test/java/applicationTest.java,d\d\dd12498384a9a412cdb53336af13277dfe18ef8c
-r
-BPoseiden-skeleton/src/test/java/com/nnk/springboot/TradeTests.java,a\5\a5762d543c9ed51616c4caa2e283e914251b9e89
-ƒ
-SPoseiden-skeleton/src/main/java/com/nnk/springboot/repositories/UserRepository.java,8\1\81481866ec92f3abd0ac978c274f5823ac455502
-„
-TPoseiden-skeleton/src/main/java/com/nnk/springboot/repositories/TradeRepository.java,3\0\30e9a964bc85d3f6dc4edb8d784aac93250da6a9
-‡
-WPoseiden-skeleton/src/main/java/com/nnk/springboot/repositories/RuleNameRepository.java,b\a\baf8dd6f6f8b7dddba54475ceb59d59e582299a0
-…
-UPoseiden-skeleton/src/main/java/com/nnk/springboot/repositories/RatingRepository.java,0\a\0a817c5308e89be8fd73521d2a6413796e9a769d
-‰
-YPoseiden-skeleton/src/main/java/com/nnk/springboot/repositories/CurvePointRepository.java,4\1\41baad01cd01b01467e41e0cc6f8cbdc83a0efed
-†
-VPoseiden-skeleton/src/main/java/com/nnk/springboot/repositories/BidListRepository.java,4\9\49f6401ace25f180090a4a4f24a81541d56462c7

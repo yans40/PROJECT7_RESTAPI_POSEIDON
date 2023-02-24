@@ -29,5 +29,8 @@ public class CurvePoint {
     @Column
     Timestamp creationDate;
 
+    public CurvePoint(int curveId, double value, double v) {
+    }
+
     // TODO: Map columns in data table CURVEPOINT with corresponding java fields
 }
