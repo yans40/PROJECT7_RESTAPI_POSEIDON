@@ -32,5 +32,9 @@ public class RuleName {
     public RuleName(String ruleName, String description, String json, String template, String sql, String sqlPart) {
     }
 
+    public RuleName() {
+
+    }
+
     // TODO: Map columns in data table RULENAME with corresponding java fields
 }
