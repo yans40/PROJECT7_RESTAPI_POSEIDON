@@ -66,5 +66,9 @@ public class BidList {
 
     public BidList(String account, String type, double bidQuantity) {
     }
+
+    public BidList() {
+
+    }
     // TODO: Map columns in data table BIDLIST with corresponding java fields
 }
