@@ -28,5 +28,9 @@ public class Rating {
 
     public Rating(String moodysRating, String sandPRating, String fitchRating, int orderNumber) {
     }
+
+    public Rating() {
+
+    }
     // TODO: Map columns in data table RATING with corresponding java fields
 }
