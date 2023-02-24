@@ -1,9 +1,14 @@
 package com.nnk.springboot.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "users")
 public class User {
     @Id
