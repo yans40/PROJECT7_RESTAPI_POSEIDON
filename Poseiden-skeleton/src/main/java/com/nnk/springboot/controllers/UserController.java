@@ -19,6 +19,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @RequestMapping("/user/list")
     public String home(Model model)
     {
@@ -34,8 +37,8 @@ public class UserController {
     @PostMapping("/user/validate")
     public String validate(@Valid User user, BindingResult result, Model model) {
         if (!result.hasErrors()) {
-            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-            user.setPassword(encoder.encode(user.getPassword()));
+
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
             userService.save(user);
             model.addAttribute("users", userService.findAll());
             return "redirect:/user/list";

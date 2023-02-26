@@ -23,6 +23,10 @@ public class TradeTests {
 	public void tradeTest() {
 		Trade trade = new Trade("Trade Account", "Type");
 
+
+			trade.setAccount("Trade Account");
+			trade.setType("Type");
+
 		// Save
 		trade = tradeRepository.save(trade);
 		Assert.assertNotNull(trade.getTradeId());
