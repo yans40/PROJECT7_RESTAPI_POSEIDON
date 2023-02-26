@@ -7,8 +7,6 @@ S
 W.idea/libraries/Maven__com_vaadin_external_google_android_json_0_0_20131108_vaadin1.xml,9\8\9852914940330060766fca305c4dc24fa2beddf5
 k
 ;.idea/libraries/Maven__org_skyscreamer_jsonassert_1_5_0.xml,6\f\6f2bcea28e31728cb204a5a8d94312872b1bbd2b
-d
-4Poseiden-skeleton/src/test/java/applicationTest.java,d\d\dd12498384a9a412cdb53336af13277dfe18ef8c
 w
 G.idea/sonarlint/issuestore/6/8/682f61e4f3359d1fef9c56bc33f1e7da1b59c3a4,6\e\6e02fd310c2196d9f72816e93c5456837579aac8
 w
@@ -205,8 +203,6 @@ w
 GPoseiden-skeleton/src/main/java/com/nnk/springboot/domain/RuleName.java,c\a\ca817df37b250b45176f21bc031eb9c8bb83663a
 u
 EPoseiden-skeleton/src/main/java/com/nnk/springboot/domain/Rating.java,d\0\d0034c4f0f92da3c1eee387fd46a9ab20fa8442a
-v
-FPoseiden-skeleton/src/main/java/com/nnk/springboot/domain/BidList.java,3\2\32027ad92ec4eb6ecb2f5a130e6c8e191af25c74
 †
 VPoseiden-skeleton/src/main/java/com/nnk/springboot/repositories/BidListRepository.java,4\9\49f6401ace25f180090a4a4f24a81541d56462c7
 z
@@ -221,18 +217,12 @@ SPoseiden-skeleton/src/main/java/com/nnk/springboot/controllers/CurveController.
 UPoseiden-skeleton/src/main/java/com/nnk/springboot/repositories/RatingRepository.java,0\a\0a817c5308e89be8fd73521d2a6413796e9a769d
 }
 MPoseiden-skeleton/src/main/java/com/nnk/springboot/service/RatingService.java,8\9\89015663e6ff0be2fa01af23968f94154b6a5d53
-„
-TPoseiden-skeleton/src/main/java/com/nnk/springboot/controllers/RatingController.java,c\a\ca5eb721e0d68d7d702481d90995a8c551c0e0c9
-†
-VPoseiden-skeleton/src/main/java/com/nnk/springboot/controllers/RuleNameController.java,9\d\9df0b84c155465fdbd9ee8a8e948c6d4e36c9ea8
 
 OPoseiden-skeleton/src/main/java/com/nnk/springboot/service/RuleNameService.java,a\9\a9754d2a0fa18b5c7bdb6953b7a4e3a56d495846
 „
 TPoseiden-skeleton/src/main/java/com/nnk/springboot/repositories/TradeRepository.java,3\0\30e9a964bc85d3f6dc4edb8d784aac93250da6a9
 |
 LPoseiden-skeleton/src/main/java/com/nnk/springboot/service/TradeService.java,1\8\187bc038d3dabaac24545b7df7fc34ddb6954066
-ƒ
-SPoseiden-skeleton/src/main/java/com/nnk/springboot/controllers/TradeController.java,a\2\a2ee8704966aecaddfd7d87fc5710f4a3489ee9f
 {
 KPoseiden-skeleton/src/main/java/com/nnk/springboot/service/UserService.java,1\7\17c4a8e180182a243d2a66cbb9a6259e8955fda1
 w

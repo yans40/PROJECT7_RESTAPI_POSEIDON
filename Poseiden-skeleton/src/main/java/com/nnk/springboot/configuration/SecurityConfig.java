@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -31,9 +32,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http)throws Exception{
         http
                 .authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/user/list").hasAuthority("USER")
+                .antMatchers("/bidList/list").hasAuthority("USER")
+                .antMatchers("/user/list").hasAuthority("ADMIN")
                 .and()
-                .formLogin();
+                .formLogin()
+                .defaultSuccessUrl("/bidList/list")
+                .and()
+                .logout();
     }
 }
