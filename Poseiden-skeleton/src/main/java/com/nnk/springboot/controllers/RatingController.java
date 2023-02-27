@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -29,12 +30,14 @@ public class RatingController {
         return "rating/list";
     }
 
+
     @GetMapping("/rating/add")
     public String addRatingForm(Model model) {
         Rating rating=new Rating();
         model.addAttribute("rating",rating);
         return "rating/add";
     }
+
 
     @PostMapping("/rating/validate")
     public String validate(@Valid Rating rating, BindingResult result, Model model) {
@@ -46,6 +49,7 @@ public class RatingController {
         // TODO: check data valid and save to db, after saving return Rating list
         return "rating/add";
     }
+
 
     @GetMapping("/rating/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {

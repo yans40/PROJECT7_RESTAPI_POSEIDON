@@ -18,11 +18,10 @@ public class BidListController {
     @Autowired
     private BidService bidService;
 
-    @RequestMapping(value = "/bidList/list", method = RequestMethod.GET)
+    @GetMapping("/bidList/list")
     public String home(Model model) {
         List<BidList> bidList = bidService.findAll();
         model.addAttribute("bidList", bidList);
-        // TODO: call service find all bids to show to the view
         return "bidList/list";
     }
 

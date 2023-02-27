@@ -32,8 +32,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http)throws Exception{
         http
                 .authorizeRequests()
-                .antMatchers("/bidList/list").hasAuthority("USER")
-                .antMatchers("/user/list").hasAuthority("ADMIN")
+                .antMatchers("/").permitAll()
+                .antMatchers("/user/**").hasAuthority("ADMIN")
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .defaultSuccessUrl("/bidList/list")
