@@ -3,7 +3,13 @@ package com.nnk.springboot.controllers;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,28 +17,59 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.lang.reflect.Array;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class UserController {
+
+    private final OAuth2AuthorizedClientService authorizedClientService;
     @Autowired
     private UserService userService;
-
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @RequestMapping(value = "/user/list",method = RequestMethod.GET)
-    public String home(Model model)
-    {
-       List<User> users = userService.findAll();
+    public UserController(OAuth2AuthorizedClientService authorizedClientService) {
+        this.authorizedClientService = authorizedClientService;
+    }
+
+    @RequestMapping(value = "/user/list", method = RequestMethod.GET)
+    public String home(Model model) {
+        List<User> users = userService.findAll();
         model.addAttribute("users", users);
         return "user/list";
     }
 
+    @RequestMapping(value = "/bidlist/*", method = RequestMethod.GET)
+    public StringBuffer OAuthhome(Model model, Principal user) {
+        StringBuffer protectedInfo = new StringBuffer();
+        OAuth2AuthenticationToken authToken = ((OAuth2AuthenticationToken) user);
+
+        OAuth2AuthorizedClient authClient = this.authorizedClientService.loadAuthorizedClient(authToken.getAuthorizedClientRegistrationId(), authToken.getName());
+
+        if (authToken.isAuthenticated()) {
+
+            Map<String, Object> userAttributes = ((DefaultOAuth2User) authToken.getPrincipal()).getAttributes();
+
+            String userToken = authClient.getAccessToken().getTokenValue();
+
+            protectedInfo.append("Welcome, " + userAttributes.get("name") + "<br><br>");
+            protectedInfo.append("Acces Token: " + userToken + "<br><br>");
+            OAuth2User principal = ((OAuth2AuthenticationToken) user).getPrincipal();
+        }
+
+
+        List<User> users = userService.findAll();
+        model.addAttribute("users", users);
+
+        return protectedInfo;
+    }
+
     @GetMapping("/user/add")
     public String addUser(Model model) {
-        User user= new User();
+        User user = new User();
         model.addAttribute("user", user);
         return "user/add";
     }
