@@ -15,12 +15,8 @@ w
 G.idea/sonarlint/issuestore/9/8/9852914940330060766fca305c4dc24fa2beddf5,d\b\db607ea96da7a95a477f3320c0b3fda1e963a189
 w
 G.idea/sonarlint/issuestore/b/b/bbb693090dc25796a8857d9eaa086436e33b0972,5\e\5e20b6927c6008c169d81d5a87703bdf4c7557a0
-w
-G.idea/sonarlint/issuestore/e/7/e7bd94d20dd1aa6065001aebed263cc3b7d996f8,d\e\deb9952587461f3dfcd4b8a97c2b32546e8cd119
 ‡
 WPoseiden-skeleton/src/main/java/com/nnk/springboot/repositories/RuleNameRepository.java,b\a\baf8dd6f6f8b7dddba54475ceb59d59e582299a0
-ƒ
-SPoseiden-skeleton/src/main/java/com/nnk/springboot/controllers/LoginController.java,2\7\270c3cd03128f20dd89cf9f31355aab0a4bec6ca
 s
 CPoseiden-skeleton/src/main/java/com/nnk/springboot/domain/User.java,7\4\74dce122121943f2c75b1def9b520386e2d65b5e
 t

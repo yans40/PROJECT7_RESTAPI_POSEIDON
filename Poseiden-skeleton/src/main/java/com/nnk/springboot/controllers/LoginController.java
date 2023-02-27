@@ -2,10 +2,13 @@ package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("app")
@@ -29,12 +32,15 @@ public class LoginController {
         return mav;
     }
 
-    @GetMapping("error")
-    public ModelAndView error() {
+    @GetMapping("/error")
+    public ModelAndView error(HttpServletResponse response) {
         ModelAndView mav = new ModelAndView();
-        String errorMessage= "You are not authorized for the requested data.";
-        mav.addObject("errorMsg", errorMessage);
-        mav.setViewName("403");
+        if (response.getStatus()== HttpStatus.FORBIDDEN.value()){
+            String errorMessage= "You are not authorized for the requested data.";
+            mav.addObject("errorMsg", errorMessage);
+            mav.setViewName("403");
+        }
+
         return mav;
     }
 }
