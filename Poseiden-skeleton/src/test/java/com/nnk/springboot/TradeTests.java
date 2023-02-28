@@ -23,7 +23,6 @@ public class TradeTests {
 	public void tradeTest() {
 		Trade trade = new Trade("Trade Account", "Type");
 
-
 			trade.setAccount("Trade Account");
 			trade.setType("Type");
 

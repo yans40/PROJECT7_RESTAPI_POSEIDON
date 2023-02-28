@@ -37,9 +37,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .defaultSuccessUrl("/bidList/list")
                 .and()
                 .oauth2Login()
+                .defaultSuccessUrl("/bidList/list")
                 .and()
                 .logout();
     }
