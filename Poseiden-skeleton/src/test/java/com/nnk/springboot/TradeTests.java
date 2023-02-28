@@ -2,6 +2,7 @@ package com.nnk.springboot;
 
 import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.repositories.TradeRepository;
+import com.nnk.springboot.service.OAuth2AuthorizedClientService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,16 +20,17 @@ public class TradeTests {
 	@Autowired
 	private TradeRepository tradeRepository;
 
+
 	@Test
 	public void tradeTest() {
-		Trade trade = new Trade("Trade Account", "Type");
+		Trade trade = new Trade();
 
 			trade.setAccount("Trade Account");
 			trade.setType("Type");
 
 		// Save
 		trade = tradeRepository.save(trade);
-		Assert.assertNotNull(trade.getTradeId());
+		Assert.assertNotNull(trade.getTrade_Id());
 		Assert.assertTrue(trade.getAccount().equals("Trade Account"));
 
 		// Update
@@ -41,7 +43,7 @@ public class TradeTests {
 		Assert.assertTrue(listResult.size() > 0);
 
 		// Delete
-		Integer id = trade.getTradeId();
+		Integer id = trade.getTrade_Id();
 		tradeRepository.delete(trade);
 		Optional<Trade> tradeList = tradeRepository.findById(id);
 		Assert.assertFalse(tradeList.isPresent());

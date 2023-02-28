@@ -15,10 +15,8 @@ import java.sql.Timestamp;
 public class Trade {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
-    private Long id;
-    @Column
-    Integer tradeId;
+    @Column(nullable = false)
+    Integer trade_Id;
     @Column
     String account;
     @Column

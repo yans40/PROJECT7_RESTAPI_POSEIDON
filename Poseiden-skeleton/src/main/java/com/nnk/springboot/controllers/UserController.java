@@ -22,14 +22,16 @@ import java.util.Map;
 @Controller
 public class UserController {
 
-    @Autowired
-    private  OAuth2AuthorizedClientService authorizedClientService;
+
+    private final  OAuth2AuthorizedClientService authorizedClientService;
     @Autowired
     private UserService userService;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
+    public UserController(OAuth2AuthorizedClientService authorizedClientService) {
+        this.authorizedClientService = authorizedClientService;
+    }
 
     @RequestMapping(value = "/user/list", method = RequestMethod.GET)
     public String home(Model model) {
@@ -63,8 +65,6 @@ public class UserController {
             String userToken = authClient.getAccessToken().getTokenValue();
 
             protectedInfo.append("Welcome, " + userAttributes.get("name") + "<br><br>");
-            protectedInfo.append("email: " + userAttributes.get("email") + "<br><br>");
-            protectedInfo.append("bio: " + userAttributes.get("bio") + "<br><br>");
             protectedInfo.append("Acces Token: " + userToken + "<br><br>");
             OAuth2User principal = ((OAuth2AuthenticationToken) user).getPrincipal();
 
