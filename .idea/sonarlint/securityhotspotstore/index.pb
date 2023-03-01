@@ -9,8 +9,6 @@ w
 G.idea/sonarlint/issuestore/0/f/0f70d7b694118ab0a397f683e945b718742c9392,c\a\caa37fc8c86205c17905a9305b94503a397f2fd1
 w
 G.idea/sonarlint/issuestore/3/4/3433ab4e6545f0c014a2c7aff4d0c2234df7246d,c\2\c2d7a3402b3fdcd1085d21c7a632fd882e808a7c
-t
-DPoseiden-skeleton/src/main/java/com/nnk/springboot/domain/Trade.java,0\0\005eb599ce56504a8a2cdf429e98c53842467f95
 w
 G.idea/sonarlint/issuestore/7/0/7082c50f63d8ec490bebbedfc6aedca6b3c292a8,3\3\3305a1f4874d2000e845d86861b10b00fbf7d507
 w
@@ -273,5 +271,3 @@ w
 G.idea/sonarlint/issuestore/d/b/dba2c08750938f2865d0401a6858e8583cbeeabe,3\5\351ef53b519485eae8873de37fc446d798550e99
 N
 Poseiden-skeleton/doc/data.sql,e\7\e7bd94d20dd1aa6065001aebed263cc3b7d996f8
-I
-Poseiden-skeleton/pom.xml,5\e\5e5bc8e0b77b5294afe321a7732d6db7c935f72a

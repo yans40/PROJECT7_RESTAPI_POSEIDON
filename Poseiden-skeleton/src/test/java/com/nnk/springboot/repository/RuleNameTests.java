@@ -3,18 +3,15 @@ package com.nnk.springboot.repository;
 import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.repositories.RuleNameRepository;
 import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 import java.util.Optional;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
-public class RuleTests {
+public class RuleNameTests {
 
 	@Autowired
 	private RuleNameRepository ruleNameRepository;
@@ -34,7 +31,7 @@ public class RuleTests {
 		Assert.assertNotNull(rule.getId());
 		Assert.assertTrue(rule.getName().equals("Rule Name"));
 
-		// Update
+		 //Update
 		rule.setName("Rule Name Update");
 		rule = ruleNameRepository.save(rule);
 		Assert.assertTrue(rule.getName().equals("Rule Name Update"));
@@ -43,7 +40,7 @@ public class RuleTests {
 		List<RuleName> listResult = ruleNameRepository.findAll();
 		Assert.assertTrue(listResult.size() > 0);
 
-		// Delete
+		 //Delete
 		Integer id = rule.getId();
 		ruleNameRepository.delete(rule);
 		Optional<RuleName> ruleList = ruleNameRepository.findById(id);

@@ -1,7 +1,8 @@
-package com.nnk.springboot.service;
+package com.nnk.springboot.serviceTest;
 
 
 import com.nnk.springboot.domain.RuleName;
+import com.nnk.springboot.service.RuleNameService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

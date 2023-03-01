@@ -2,15 +2,15 @@ package com.nnk.springboot.controller;
 
 import com.nnk.springboot.controllers.BidListController;
 import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.service.BidService;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-public class BidControllerTest {
+public class BidListControllerTest {
 
     @Autowired
     BidListController bidListController;

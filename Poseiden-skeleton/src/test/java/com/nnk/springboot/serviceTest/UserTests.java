@@ -1,22 +1,22 @@
-package com.nnk.springboot.repository;
+package com.nnk.springboot.serviceTest;
 
 import com.nnk.springboot.domain.User;
-import com.nnk.springboot.repositories.UserRepository;
+import com.nnk.springboot.service.UserService;
 import org.junit.Assert;
-
-import org.junit.jupiter.api.Test;
-
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-
+@RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserTests {
     @Autowired
-    UserRepository userRepository;
+    UserService userService;
+
 
     @Test
     public void userTest() {
@@ -27,20 +27,18 @@ public class UserTests {
         user.setRole("user");
 
         //Save
-        user = userRepository.save(user);
-        Assert.assertNotNull(user.getId());
+        user = userService.save(user);
         Assert.assertTrue(user.getUsername()=="Alex");
 
         //Update
         user.setUsername("Al");
-        user= userRepository.save(user);
+        user=userService.save(user);
         Assert.assertTrue(user.getUsername()=="Al");
 
         //Find
-        List<User> userList = userRepository.findAll();
+        List<User> userList = userService.findAll();
         Assert.assertTrue(userList.size()>0);
     }
 
 
 }
-

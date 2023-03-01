@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class BidService {
+public class BidListService {
     @Autowired
     private BidListRepository bidListRepository;
     public List<BidList> findAll(){

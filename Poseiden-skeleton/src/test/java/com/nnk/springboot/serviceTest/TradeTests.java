@@ -1,6 +1,7 @@
-package com.nnk.springboot.service;
+package com.nnk.springboot.serviceTest;
 
 import com.nnk.springboot.domain.Trade;
+import com.nnk.springboot.service.TradeService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

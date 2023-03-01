@@ -17,14 +17,8 @@ w
 G.idea/sonarlint/issuestore/b/b/bbb693090dc25796a8857d9eaa086436e33b0972,5\e\5e20b6927c6008c169d81d5a87703bdf4c7557a0
 á
 WPoseiden-skeleton/src/main/java/com/nnk/springboot/repositories/RuleNameRepository.java,b\a\baf8dd6f6f8b7dddba54475ceb59d59e582299a0
-w
-GPoseiden-skeleton/src/main/java/com/nnk/springboot/domain/RuleName.java,c\a\ca817df37b250b45176f21bc031eb9c8bb83663a
-u
-EPoseiden-skeleton/src/main/java/com/nnk/springboot/domain/Rating.java,d\0\d0034c4f0f92da3c1eee387fd46a9ab20fa8442a
 Ü
 VPoseiden-skeleton/src/main/java/com/nnk/springboot/repositories/BidListRepository.java,4\9\49f6401ace25f180090a4a4f24a81541d56462c7
-z
-JPoseiden-skeleton/src/main/java/com/nnk/springboot/service/BidService.java,6\2\62bc6cbe75b916c21199e1868c686f4d36eba7a5
 â
 YPoseiden-skeleton/src/main/java/com/nnk/springboot/repositories/CurvePointRepository.java,4\1\41baad01cd01b01467e41e0cc6f8cbdc83a0efed
 Å
@@ -743,16 +737,10 @@ z
 J.idea/libraries/Maven__com_github_stephenc_jcip_jcip_annotations_1_0_1.xml,c\1\c19757e035cb461b118aab29bdc6ac5f57f3312e
 Ç
 RPoseiden-skeleton/src/main/java/com/nnk/springboot/controllers/HomeController.java,f\a\fa04f7c7c93f0d80995b949c3de33c181d41e218
-Ö
-UPoseiden-skeleton/src/main/java/com/nnk/springboot/controllers/BidListController.java,c\d\cd1faf3280d23e9642e6aa7e4e25a6bdb541992e
-s
-CPoseiden-skeleton/src/main/java/com/nnk/springboot/domain/User.java,7\4\74dce122121943f2c75b1def9b520386e2d65b5e
 É
 SPoseiden-skeleton/src/main/java/com/nnk/springboot/controllers/LoginController.java,2\7\270c3cd03128f20dd89cf9f31355aab0a4bec6ca
 y
 IPoseiden-skeleton/src/main/java/com/nnk/springboot/domain/CurvePoint.java,c\7\c7dafa6a18e180d19955481c40d84636b993ebb0
-v
-FPoseiden-skeleton/src/main/java/com/nnk/springboot/domain/BidList.java,3\2\32027ad92ec4eb6ecb2f5a130e6c8e191af25c74
 Ñ
 TPoseiden-skeleton/src/main/java/com/nnk/springboot/repositories/TradeRepository.java,3\0\30e9a964bc85d3f6dc4edb8d784aac93250da6a9
 |
@@ -1027,9 +1015,5 @@ w
 G.idea/sonarlint/issuestore/d/b/dba2c08750938f2865d0401a6858e8583cbeeabe,3\5\351ef53b519485eae8873de37fc446d798550e99
 N
 Poseiden-skeleton/doc/data.sql,e\7\e7bd94d20dd1aa6065001aebed263cc3b7d996f8
-t
-DPoseiden-skeleton/src/main/java/com/nnk/springboot/domain/Trade.java,0\0\005eb599ce56504a8a2cdf429e98c53842467f95
 É
 SPoseiden-skeleton/src/main/java/com/nnk/springboot/controllers/TradeController.java,a\2\a2ee8704966aecaddfd7d87fc5710f4a3489ee9f
-I
-Poseiden-skeleton/pom.xml,5\e\5e5bc8e0b77b5294afe321a7732d6db7c935f72a

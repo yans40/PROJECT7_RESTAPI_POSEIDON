@@ -1,36 +1,31 @@
 package com.nnk.springboot.domain;
 
-import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.repositories.BidListRepository;
+
 import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.oauth2.client.InMemoryOAuth2AuthorizedClientService;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
-import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 import java.util.Optional;
 
-@SpringBootTest
-public class BidTests {
 
+@SpringBootTest
+public class BidListTests {
 	@Autowired
 	private BidListRepository bidListRepository;
 
 	@Test
 	public void bidListTest() {
-		BidList bid = new BidList("Account Test", "Type Test", 10d);
+		BidList bid = new BidList();
+		bid.setAccount("accountTest");
+		bid.setType("typetest");
+		bid.setBidQuantity(10d);
 
 		// Save
 		bid = bidListRepository.save(bid);
-		Assert.assertNotNull(bid.getBidListId());
+		Assert.assertNotNull(bid.getId());
 		Assert.assertEquals(bid.getBidQuantity(), 10d, 10d);
 
 		// Update
@@ -43,7 +38,7 @@ public class BidTests {
 		Assert.assertTrue(listResult.size() > 0);
 
 		// Delete
-		Integer id = bid.getBidListId();
+		Integer id = bid.getId();
 		bidListRepository.delete(bid);
 		Optional<BidList> bidList = bidListRepository.findById(id);
 		Assert.assertFalse(bidList.isPresent());

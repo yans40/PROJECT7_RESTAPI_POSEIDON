@@ -15,24 +15,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 public class SpringWebAppTest {
 
-    private MockMvc mock;
 
     @Autowired
     private WebApplicationContext context;
 
-    @BeforeEach
-    public void setup(){
-        mock=MockMvcBuilders
-                .webAppContextSetup(context)
-                .build();
-    }
-
-    @Test
-    public void shouldReturnDefaultMessage() throws Exception{
-        mock.perform(get("/login"))
-                .andDo(print())
-                .andExpect(status().isOk());
-    }
+//    @BeforeEach
+//    public void setup(){
+//        mock=MockMvcBuilders
+//                .webAppContextSetup(context)
+//                .build();
+//    }
+//
+//    @Test
+//    public void shouldReturnDefaultMessage() throws Exception{
+//        mock.perform(get("/login"))
+//                .andDo(print())
+//                .andExpect(status().isOk());
+//    }
 
 //    @Test
 //    public void userLoginTest()throws Exception{

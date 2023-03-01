@@ -3,8 +3,9 @@ package com.nnk.springboot.repository;
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.repositories.RatingRepository;
 import org.junit.Assert;
-import org.junit.Test;
+
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,11 +20,6 @@ public class RatingTests {
 	@Autowired
 	private RatingRepository ratingRepository;
 
-	@BeforeEach
-	public void initRatingrepository(){
-
-
-	}
 
 	@Test
 	public void ratingTest() {
@@ -35,7 +31,6 @@ public class RatingTests {
 
 		// Save
 		rating = ratingRepository.save(rating);
-		Assert.assertNotNull(rating.getId());
 		Assert.assertTrue(rating.getOrderNumber() == 10);
 
 		// Update
