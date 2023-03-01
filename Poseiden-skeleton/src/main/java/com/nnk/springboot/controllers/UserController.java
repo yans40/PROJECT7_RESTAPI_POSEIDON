@@ -22,8 +22,8 @@ import java.util.Map;
 @Controller
 public class UserController {
 
-
-    private final  OAuth2AuthorizedClientService authorizedClientService;
+    @Autowired
+    private final OAuth2AuthorizedClientService authorizedClientService;
     @Autowired
     private UserService userService;
     @Autowired
@@ -40,7 +40,7 @@ public class UserController {
         return "user/list";
     }
 
-    @RequestMapping( "/*")
+    @RequestMapping("/*")
     public String OAuth2GitClienthome(Principal user) {
 
         StringBuffer userInfo = new StringBuffer();
@@ -59,7 +59,7 @@ public class UserController {
 
         OAuth2AuthorizedClient authClient = this.authorizedClientService.loadAuthorizedClient(authToken.getAuthorizedClientRegistrationId(), authToken.getName());
 
-        if (authToken.isAuthenticated()){
+        if (authToken.isAuthenticated()) {
 
             Map<String, Object> userAttributes = ((DefaultOAuth2User) authToken.getPrincipal()).getAttributes();
             String userToken = authClient.getAccessToken().getTokenValue();
