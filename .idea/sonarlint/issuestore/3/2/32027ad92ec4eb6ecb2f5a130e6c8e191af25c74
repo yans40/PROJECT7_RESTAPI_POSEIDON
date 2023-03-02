@@ -1,0 +1,15 @@
+
+u	java:S116"TRename this field "BidListId" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ùöªìûÿÿÿÿ8ˆç–¨è0
+£
+java:S1186C"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÃîÏüÿÿÿÿ8€İ¦ªè0
+H
+java:S1135I"2Complete the task associated to this TODO comment.(íúÈÕ
+o
+java:S1128"RRemove this unused import 'org.springframework.beans.factory.annotation.Required'.(‘™ê¢8¼¿Óöé0
+b
+java:S1128"@Remove this unused import 'javax.validation.constraints.Digits'.(µÍƒ¨ÿÿÿÿÿ8¼¿Óöé0
+d
+java:S1128	"BRemove this unused import 'javax.validation.constraints.NotBlank'.(µã‡ıÿÿÿÿ8¼¿Óöé0
+G
+java:S1128
+"*Remove this unused import 'java.sql.Date'.(ÙÀ½Ê8¼¿Óöé0

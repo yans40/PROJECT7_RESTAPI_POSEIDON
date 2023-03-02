@@ -471,8 +471,6 @@ w
 G.idea/sonarlint/issuestore/7/b/7b739b7504e36094a252de86aa0cdc063865c06a,f\0\f0639c85793ba50a1ff38c06e93a77fd42a8cb3c
 w
 G.idea/sonarlint/issuestore/5/e/5ed1c00bded3571f661e3c3911c0cbe44c07eeb9,9\9\9924402b4bf8ee672cc893a7d10f3cb08777353a
-†
-VPoseiden-skeleton/src/main/java/com/nnk/springboot/controllers/RuleNameController.java,9\d\9df0b84c155465fdbd9ee8a8e948c6d4e36c9ea8
 „
 TPoseiden-skeleton/src/main/java/com/nnk/springboot/service/MyUserDetailsService.java,9\b\9b2f53940a244d9622a95240c0f8196b8d611512
 w
@@ -829,8 +827,6 @@ w
 G.idea/sonarlint/issuestore/b/e/bee21415e3da7d0f81a5e93a0e3e6d74685e275f,b\e\beb88b1d3bc07d377e233c6d19d5fb0312dc2e67
 w
 G.idea/sonarlint/issuestore/7/6/766741701460a524e4f87dd7ce16a31d02a88a3e,0\2\021f2c7684e60b61bca600473d074ff36ac32063
-w
-G.idea/sonarlint/issuestore/7/6/76dae541f256528afd161e79bc49e4d960f5b947,1\e\1e59e842c8bee6d5798cfb33053cdc9197789ab1
 w
 G.idea/sonarlint/issuestore/b/4/b44fea654f28bc65fe3115384cf6a44cbb567c70,a\d\ad6a949165177cb02c5ecef3187d0ce2908ccb52
 w
