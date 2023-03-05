@@ -2,6 +2,7 @@ package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
@@ -19,6 +20,7 @@ import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Controller
 public class UserController {
 
@@ -35,6 +37,7 @@ public class UserController {
 
     @RequestMapping(value = "/user/list", method = RequestMethod.GET)
     public String home(Model model) {
+        log.info("display user list");
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
         return "user/list";
@@ -84,7 +87,7 @@ public class UserController {
     public String validate(@Valid User user, BindingResult result, Model model) {
         if (!result.hasErrors()) {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-            userService.save(user);
+            userService.save(user);log.info("user sauvegardé avec password encodé");
             model.addAttribute("users", userService.findAll());
             return "redirect:/user/list";
         }

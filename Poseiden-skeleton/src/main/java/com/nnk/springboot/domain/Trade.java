@@ -16,6 +16,8 @@ public class Trade {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
+    Integer id;
+    @Column
     Integer trade_Id;
     @Column
     String account;

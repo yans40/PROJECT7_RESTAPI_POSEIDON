@@ -61,7 +61,7 @@ public class TradeController {
         if (result.hasErrors()) {
             return "trade/update";
         }
-        trade.setTrade_Id(id);
+        trade.setId(id);
         trade.setAccount(trade.getAccount());
         trade.setType(trade.getType());
         trade.setBuyQuantity(trade.getBuyQuantity());

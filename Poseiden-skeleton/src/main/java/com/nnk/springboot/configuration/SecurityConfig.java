@@ -1,7 +1,6 @@
 package com.nnk.springboot.configuration;
 
 import com.nnk.springboot.service.MyUserDetailsService;
-import com.nnk.springboot.service.OAuth2AuthorizedClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

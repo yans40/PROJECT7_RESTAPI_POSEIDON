@@ -15,22 +15,19 @@ import java.util.Arrays;
 @Slf4j
 @Service
 public class MyUserDetailsService implements UserDetailsService {
+
     @Autowired
-    private UserRepository userRepository;
+   private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findUsername(username);
+        User user = userRepository.findByUsername(username);
 
-        if (user == null) {
-            log.info("user null");
-            throw new UsernameNotFoundException("Username not found" + username);
-        } else {
-            log.info("user finded");
-            return new org.springframework.security.core.userdetails.User(user.getUsername(),
-                    user.getPassword(),
-                    Arrays.asList(new SimpleGrantedAuthority(user.getRole())));
+        if (user == null){
+            log.info("user not found");
+            throw  new UsernameNotFoundException("Username not found"+username);
         }
-
+        log.info("user found");
+         return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(), Arrays.asList(new SimpleGrantedAuthority(user.getRole())));
     }
 }

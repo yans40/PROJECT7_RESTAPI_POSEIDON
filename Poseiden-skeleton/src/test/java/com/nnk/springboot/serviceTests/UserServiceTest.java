@@ -46,6 +46,10 @@ public class UserServiceTest {
         Assert.assertFalse(tradeList.isPresent());
     }
 
+//    @BeforeEach
+//    void cleanDB(){
+//       this.userRepository.deleteAll();
+//    }
 
 
 }
