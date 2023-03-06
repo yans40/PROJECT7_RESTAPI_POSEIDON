@@ -2,7 +2,7 @@ package com.nnk.springboot.domainTests;
 
 import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.repositories.TradeRepository;
-import com.nnk.springboot.service.OAuth2AuthorizedClientService;
+//import com.nnk.springboot.service.OAuth2AuthorizedClientService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

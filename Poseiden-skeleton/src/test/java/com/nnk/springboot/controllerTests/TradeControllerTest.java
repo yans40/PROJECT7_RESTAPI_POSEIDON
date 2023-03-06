@@ -1,6 +1,7 @@
 package com.nnk.springboot.controllerTests;
 
 import com.nnk.springboot.domain.BidList;
+import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.service.TradeService;
@@ -21,6 +22,8 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.verify;
@@ -45,6 +48,26 @@ public class TradeControllerTest {
     @MockBean
     private TradeService tradeService;
 
+
+    @WithMockUser(authorities = "USER")
+    @Test
+    public void testHome() throws Exception {
+        // Given
+        List<Trade> tradeList = new ArrayList<>();
+        Trade trade = new Trade();
+
+        trade.setAccount("testaccount");
+        trade.setType("testtype");
+        trade.setBuyQuantity(12d);
+
+
+        tradeList.add(trade);
+        when(tradeService.findAll()).thenReturn(tradeList);
+
+        // When and then
+        mockMvc.perform(get("/trade/list"))
+                .andExpect(status().isOk());
+    }
     @WithMockUser(username = "jean",password = "azerty",authorities = "USER")
     @Test
     public void should_add_trade() throws Exception {

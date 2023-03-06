@@ -1,5 +1,6 @@
 package com.nnk.springboot.controllerTests;
 
+import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.domain.User;
@@ -21,6 +22,8 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.verify;
@@ -46,6 +49,29 @@ public class RatingControllerTest {
 
     @MockBean
     private RatingService ratingService;
+
+
+
+    @WithMockUser(authorities = "USER")
+    @Test
+    public void testHome() throws Exception {
+        // Given
+        List<Rating> ratingList = new ArrayList<>();
+        Rating rating = new Rating();
+
+        rating.setMoodysRating("moodystest");
+        rating.setFitchRating("fitchTest");
+        rating.setSandPRating("sandTest");
+        rating.setOrderNumber(11);
+
+        ratingList.add(rating);
+        when(ratingService.findAll()).thenReturn(ratingList);
+
+        // When and then
+        mockMvc.perform(get("/rating/list"))
+                .andExpect(status().isOk());
+    }
+
 
     @WithMockUser(username = "michel",password = "azerty",authorities = {"USER","ADMIN"})
     @Test

@@ -22,6 +22,8 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.verify;
@@ -48,6 +50,24 @@ public class CurvePointsControllerTest {
     private CurvePointService curvePointService;
 
 
+    @WithMockUser(authorities = "USER")
+    @Test
+    public void testHome() throws Exception {
+        // Given
+        List<CurvePoint> curvePoints = new ArrayList<>();
+        CurvePoint curvePoint = new CurvePoint();
+
+        curvePoint.setCurveId(11);
+        curvePoint.setTerm(12d);
+        curvePoint.setValue(11d);
+
+        curvePoints.add(curvePoint);
+        when(curvePointService.findAll()).thenReturn(curvePoints);
+
+        // When and then
+        mockMvc.perform(get("/curvePoint/list"))
+                .andExpect(status().isOk());
+    }
 
     @WithMockUser(username = "jean",password = "azerty",authorities = "USER")
     @Test

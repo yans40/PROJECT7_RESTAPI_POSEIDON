@@ -1,5 +1,6 @@
 package com.nnk.springboot.controllerTests;
 
+import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.service.UserService;
 import org.junit.Test;
@@ -18,6 +19,8 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.verify;
@@ -44,6 +47,24 @@ public class UserControllerTest {
     @MockBean
     private UserService userService;
 
+    @WithMockUser(authorities = "ADMIN")
+    @Test
+    public void testHome() throws Exception {
+        // Given
+        List<User> userList = new ArrayList<>();
+        User user = new User();
+
+        user.setFullname("john doe");
+        user.setUsername("john");
+        user.setPassword("testpassword");
+
+        userList.add(user);
+        when(userService.findAll()).thenReturn(userList);
+
+        // When and then
+        mockMvc.perform(get("/user/list"))
+                .andExpect(status().isOk());
+    }
 
     @WithMockUser(username = "michel", password = "azerty", authorities = "ADMIN")
     @Test

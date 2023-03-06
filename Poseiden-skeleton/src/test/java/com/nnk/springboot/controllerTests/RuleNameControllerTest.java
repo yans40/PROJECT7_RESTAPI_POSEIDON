@@ -1,6 +1,7 @@
 package com.nnk.springboot.controllerTests;
 
 
+import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.service.RuleNameService;
@@ -21,6 +22,8 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.verify;
@@ -44,6 +47,29 @@ public class RuleNameControllerTest {
 
     @MockBean
     private RuleNameService ruleNameService;
+
+
+    @WithMockUser(authorities = "USER")
+    @Test
+    public void testHome() throws Exception {
+        // Given
+        List<RuleName> ruleNameList = new ArrayList<>();
+        RuleName ruleName = new RuleName();
+
+        ruleName.setName("name");
+        ruleName.setDescription("description");
+        ruleName.setJson("json");
+        ruleName.setTemplate("template");
+        ruleName.setSqlStr("sqlStr");
+        ruleName.setSqlPart("sqlPart");
+
+        ruleNameList.add(ruleName);
+        when(ruleNameService.findAll()).thenReturn(ruleNameList);
+
+        // When and then
+        mockMvc.perform(get("/ruleName/list"))
+                .andExpect(status().isOk());
+    }
 
     @WithMockUser(username = "jean",password = "azerty",authorities = "USER")
     @Test
