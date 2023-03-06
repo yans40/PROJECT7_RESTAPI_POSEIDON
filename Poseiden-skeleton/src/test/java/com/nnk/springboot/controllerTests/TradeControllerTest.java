@@ -2,6 +2,7 @@ package com.nnk.springboot.controllerTests;
 
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.Trade;
+import com.nnk.springboot.domain.User;
 import com.nnk.springboot.service.TradeService;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,6 +23,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Optional;
 
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -79,6 +82,23 @@ public class TradeControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("trade/update"))
                 .andExpect(model().attribute("trade", trade));
+    }
+
+    @WithMockUser(authorities = "USER")
+    @Test
+    public void testDeleteTrade() throws Exception {
+
+        Trade trade = new Trade();
+        trade.setId(1);
+
+        when(tradeService.findById(1)).thenReturn(Optional.of(trade));
+
+        mockMvc.perform(get("/trade/delete/{id}", 1))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/trade/list"));
+
+        // Vérification que l'utilisateur a été supprimé
+        verify(tradeService).delete(trade);
     }
 
     @BeforeEach

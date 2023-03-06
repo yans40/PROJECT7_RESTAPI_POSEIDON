@@ -2,6 +2,7 @@ package com.nnk.springboot.controllerTests;
 
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.domain.Trade;
+import com.nnk.springboot.domain.User;
 import com.nnk.springboot.service.RatingService;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,6 +23,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Optional;
 
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -83,6 +86,23 @@ public class RatingControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("rating/update"))
                 .andExpect(model().attribute("rating", rating));
+    }
+
+    @WithMockUser(authorities = "USER")
+    @Test
+    public void testDeleteUser() throws Exception {
+
+        Rating rating = new Rating();
+        rating.setId(1);
+
+        when(ratingService.findById(1)).thenReturn(Optional.of(rating));
+
+        mockMvc.perform(get("/rating/delete/{id}", 1))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/rating/list"));
+
+        // Vérification que l'utilisateur a été supprimé
+        verify(ratingService).delete(rating);
     }
 
     @BeforeEach

@@ -2,6 +2,7 @@ package com.nnk.springboot.controllerTests;
 
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.CurvePoint;
+import com.nnk.springboot.domain.User;
 import com.nnk.springboot.service.CurvePointService;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,6 +24,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Optional;
 
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -85,6 +88,23 @@ public class CurvePointsControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("curvePoint/update"))
                 .andExpect(model().attribute("curvePoint", curvePoint));
+    }
+
+    @WithMockUser(authorities = "USER")
+    @Test
+    public void testDeleteUser() throws Exception {
+
+        CurvePoint curvePoint = new CurvePoint();
+        curvePoint.setId(1);
+
+        when(curvePointService.findById(1)).thenReturn(Optional.of(curvePoint));
+
+        mockMvc.perform(get("/curvePoint/delete/{id}", 1))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/curvePoint/list"));
+
+        // Vérification que l'utilisateur a été supprimé
+        verify(curvePointService).delete(curvePoint);
     }
 
 

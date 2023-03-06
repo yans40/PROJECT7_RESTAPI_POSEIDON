@@ -1,6 +1,7 @@
 package com.nnk.springboot.controllerTests;
 
 import com.nnk.springboot.domain.BidList;
+import com.nnk.springboot.domain.User;
 import com.nnk.springboot.service.BidListService;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,6 +23,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Optional;
 
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -81,6 +84,23 @@ public class BidListControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("bidList/update"))
                 .andExpect(model().attribute("bidList", bidList));
+    }
+
+    @WithMockUser(authorities = "ADMIN")
+    @Test
+    public void testDeleteUser() throws Exception {
+
+        BidList bidList = new BidList();
+        bidList.setId(1);
+
+        when(bidListService.findById(1)).thenReturn(Optional.of(bidList));
+
+        mockMvc.perform(get("/bidList/delete/{id}", 1))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/bidList/list"));
+
+        // Vérification que l'utilisateur a été supprimé
+        verify(bidListService).delete(bidList);
     }
 
 

@@ -2,6 +2,7 @@ package com.nnk.springboot.controllerTests;
 
 
 import com.nnk.springboot.domain.RuleName;
+import com.nnk.springboot.domain.User;
 import com.nnk.springboot.service.RuleNameService;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,6 +23,8 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Optional;
 
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -83,6 +86,23 @@ public class RuleNameControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("ruleName/update"))
                 .andExpect(model().attribute("ruleName", ruleName));
+    }
+
+    @WithMockUser(authorities = "USER")
+    @Test
+    public void testDeleteRuleName() throws Exception {
+
+        RuleName ruleName = new RuleName();
+        ruleName.setId(1);
+
+        when(ruleNameService.findById(1)).thenReturn(Optional.of(ruleName));
+
+        mockMvc.perform(get("/ruleName/delete/{id}", 1))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/ruleName/list"));
+
+        // Vérification que l'utilisateur a été supprimé
+        verify(ruleNameService).delete(ruleName);
     }
 
     @BeforeEach

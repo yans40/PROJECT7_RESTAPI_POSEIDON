@@ -5,7 +5,6 @@ import com.nnk.springboot.service.UserService;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -21,13 +20,14 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Optional;
 
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -45,18 +45,18 @@ public class UserControllerTest {
     private UserService userService;
 
 
-    @WithMockUser(username = "michel",password = "azerty",authorities = "ADMIN")
+    @WithMockUser(username = "michel", password = "azerty", authorities = "ADMIN")
     @Test
-    public void should_return_user_list()throws Exception{
+    public void should_return_user_list() throws Exception {
 
         this.mockMvc.perform(get("/user/list"))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
 
-    @WithMockUser(username = "jean",password = "azerty",authorities = "USER")
+    @WithMockUser(username = "jean", password = "azerty", authorities = "USER")
     @Test
-    public void should_return_Error_Page()throws Exception{
+    public void should_return_Error_Page() throws Exception {
 
         this.mockMvc.perform(get("/user/list"))
                 .andDo(print())
@@ -65,11 +65,11 @@ public class UserControllerTest {
 
     @WithMockUser(authorities = "ADMIN")
     @Test
-    public void should_validate_user_inscription()throws Exception {
-        MultiValueMap<String,String> formData =  new LinkedMultiValueMap<>();
-        formData.add("fullname","john doe");
-        formData.add("username","john");
-        formData.add("password","testpassword");
+    public void should_validate_user_inscription() throws Exception {
+        MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
+        formData.add("fullname", "john doe");
+        formData.add("username", "john");
+        formData.add("password", "testpassword");
 
         mockMvc.perform(post("/user/validate")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -79,6 +79,7 @@ public class UserControllerTest {
                 .andExpect(redirectedUrl("/user/list"));
     }
 
+
     @WithMockUser(authorities = "ADMIN")
     @Test
     public void testShowUserUpdateForm() throws Exception {
@@ -86,7 +87,7 @@ public class UserControllerTest {
         int userId = 1;
         User user = new User();
         user.setId(userId);
-        Mockito.when(userService.findById(userId)).thenReturn(Optional.of(user));
+        when(userService.findById(userId)).thenReturn(Optional.of(user));
 
         // When and Then
         mockMvc.perform(get("/user/update/" + userId))
@@ -95,10 +96,39 @@ public class UserControllerTest {
                 .andExpect(model().attribute("user", user));
     }
 
+    @WithMockUser(authorities = "ADMIN")
+    @Test
+    public void testDeleteByAdmin() throws Exception {
+
+        User user = new User();
+        user.setId(1);
+
+        when(userService.findById(1)).thenReturn(Optional.of(user));
+
+        mockMvc.perform(get("/user/delete/{id}", 1))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/user/list"));
+
+        // Vérification que l'utilisateur a été supprimé
+        verify(userService).delete(user);
+    }
+
+    @WithMockUser(authorities = "USER")
+    @Test
+    public void testDeleteByUserFail() throws Exception {
+
+        User user = new User();
+        user.setId(1);
+
+        when(userService.findById(1)).thenReturn(Optional.of(user));
+
+        mockMvc.perform(get("/user/delete/{id}", 1))
+                .andExpect(status().isForbidden());
+    }
 
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         mockMvc = MockMvcBuilders
                 .webAppContextSetup(context)
                 .apply(springSecurity())
