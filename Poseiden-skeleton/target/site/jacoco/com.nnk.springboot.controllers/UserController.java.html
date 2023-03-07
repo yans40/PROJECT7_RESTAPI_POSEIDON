@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-boot-skeleton</a> &gt; <a href="index.source.html" class="el_package">com.nnk.springboot.controllers</a> &gt; <span class="el_source">UserController.java</span></div><h1>UserController.java</h1><pre class="source lang-java linenums">package com.nnk.springboot.controllers;
+
+import com.nnk.springboot.domain.User;
+import com.nnk.springboot.service.UserService;
+import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.security.Principal;
+import java.util.List;
+import java.util.Map;
+
+<span class="fc" id="L24">@Slf4j</span>
+@Controller
+public class UserController {
+
+    @Autowired
+    private final OAuth2AuthorizedClientService authorizedClientService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+<span class="fc" id="L35">    public UserController(OAuth2AuthorizedClientService authorizedClientService) {</span>
+<span class="fc" id="L36">        this.authorizedClientService = authorizedClientService;</span>
+<span class="fc" id="L37">    }</span>
+
+    @RequestMapping(value = &quot;/user/list&quot;, method = RequestMethod.GET)
+    public String home(Model model) {
+<span class="nc" id="L41">        log.info(&quot;display user list&quot;);</span>
+<span class="nc" id="L42">        List&lt;User&gt; users = userService.findAll();</span>
+<span class="nc" id="L43">        model.addAttribute(&quot;users&quot;, users);</span>
+<span class="nc" id="L44">        return &quot;user/list&quot;;</span>
+    }
+
+    @RequestMapping(&quot;/*&quot;)
+    public String OAuth2GitClienthome(Principal user) {
+
+<span class="nc" id="L50">        StringBuffer userInfo = new StringBuffer();</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">        if (user instanceof OAuth2AuthenticationToken) {</span>
+
+<span class="nc" id="L53">            userInfo.append(getOAuth2LoginInfo(user));</span>
+        }
+
+<span class="nc" id="L56">        return userInfo.toString();</span>
+    }
+
+    private StringBuffer getOAuth2LoginInfo(Principal user) {
+<span class="nc" id="L60">        StringBuffer protectedInfo = new StringBuffer();</span>
+
+<span class="nc" id="L62">        OAuth2AuthenticationToken authToken = ((OAuth2AuthenticationToken) user);</span>
+
+<span class="nc" id="L64">        OAuth2AuthorizedClient authClient = this.authorizedClientService.loadAuthorizedClient(authToken.getAuthorizedClientRegistrationId(), authToken.getName());</span>
+
+<span class="nc bnc" id="L66" title="All 2 branches missed.">        if (authToken.isAuthenticated()) {</span>
+
+<span class="nc" id="L68">            Map&lt;String, Object&gt; userAttributes = ((DefaultOAuth2User) authToken.getPrincipal()).getAttributes();</span>
+<span class="nc" id="L69">            String userToken = authClient.getAccessToken().getTokenValue();</span>
+
+<span class="nc" id="L71">            protectedInfo.append(&quot;Welcome, &quot; + userAttributes.get(&quot;name&quot;) + &quot;&lt;br&gt;&lt;br&gt;&quot;);</span>
+<span class="nc" id="L72">            protectedInfo.append(&quot;Acces Token: &quot; + userToken + &quot;&lt;br&gt;&lt;br&gt;&quot;);</span>
+<span class="nc" id="L73">            OAuth2User principal = ((OAuth2AuthenticationToken) user).getPrincipal();</span>
+
+        }
+<span class="nc" id="L76">        return protectedInfo;</span>
+
+    }
+
+    @GetMapping(&quot;/user/add&quot;)
+    public String addUser(@NotNull Model model) {
+<span class="nc" id="L82">        User user = new User();</span>
+<span class="nc" id="L83">        model.addAttribute(&quot;user&quot;, user);</span>
+<span class="nc" id="L84">        return &quot;user/add&quot;;</span>
+    }
+
+    @PostMapping(&quot;/user/validate&quot;)
+    public String validate(@Valid User user, BindingResult result, Model model) {
+<span class="nc bnc" id="L89" title="All 2 branches missed.">        if (!result.hasErrors()) {</span>
+<span class="nc" id="L90">            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));</span>
+<span class="nc" id="L91">            userService.save(user);log.info(&quot;user sauvegardé avec password encodé&quot;);</span>
+<span class="nc" id="L92">            model.addAttribute(&quot;users&quot;, userService.findAll());</span>
+<span class="nc" id="L93">            return &quot;redirect:/user/list&quot;;</span>
+        }
+<span class="nc" id="L95">        return &quot;user/add&quot;;</span>
+    }
+
+    @GetMapping(&quot;/user/update/{id}&quot;)
+    public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model) {
+<span class="nc" id="L100">        User user = userService.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid user Id:&quot; + id));</span>
+<span class="nc" id="L101">        user.setPassword(&quot;&quot;);</span>
+<span class="nc" id="L102">        model.addAttribute(&quot;user&quot;, user);</span>
+<span class="nc" id="L103">        return &quot;user/update&quot;;</span>
+    }
+
+    @PostMapping(&quot;/user/update/{id}&quot;)
+    public String updateUser(@PathVariable(&quot;id&quot;) Integer id, @Valid User user,
+                             BindingResult result, Model model) {
+<span class="nc bnc" id="L109" title="All 2 branches missed.">        if (result.hasErrors()) {</span>
+<span class="nc" id="L110">            return &quot;user/update&quot;;</span>
+        }
+
+<span class="nc" id="L113">        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();</span>
+<span class="nc" id="L114">        user.setPassword(encoder.encode(user.getPassword()));</span>
+<span class="nc" id="L115">        user.setId(id);</span>
+<span class="nc" id="L116">        userService.save(user);</span>
+<span class="nc" id="L117">        model.addAttribute(&quot;users&quot;, userService.findAll());</span>
+<span class="nc" id="L118">        return &quot;redirect:/user/list&quot;;</span>
+    }
+
+    @GetMapping(&quot;/user/delete/{id}&quot;)
+    public String deleteUser(@PathVariable(&quot;id&quot;) Integer id, Model model) {
+<span class="nc" id="L123">        User user = userService.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid user Id:&quot; + id));</span>
+<span class="nc" id="L124">        userService.delete(user);</span>
+<span class="nc" id="L125">        model.addAttribute(&quot;users&quot;, userService.findAll());</span>
+<span class="nc" id="L126">        return &quot;redirect:/user/list&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
