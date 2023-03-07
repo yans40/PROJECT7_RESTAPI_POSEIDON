@@ -39,13 +39,6 @@ public class SpringWebAppTest {
                 .andExpect(status().isOk());
     }
 
-//    @Test
-//    public void userLoginTest()throws Exception{
-//        mock.perform(formLogin("/login")
-//                .user("springuser")
-//                .password("spring123"))
-//        .andExpect(authenticated());
-//    }
 
     @Test
     public void userLoginFail()throws Exception{

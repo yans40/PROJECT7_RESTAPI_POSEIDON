@@ -3,6 +3,7 @@ package com.nnk.springboot.controllers;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
@@ -77,7 +78,7 @@ public class UserController {
     }
 
     @GetMapping("/user/add")
-    public String addUser(Model model) {
+    public String addUser(@NotNull Model model) {
         User user = new User();
         model.addAttribute("user", user);
         return "user/add";
