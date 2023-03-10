@@ -5,6 +5,7 @@ import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.service.RatingService;
 import org.junit.Assert;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,23 +30,23 @@ public class RatingServiceTest {
 
         // Save
         rating = ratingService.save(rating);
-        Assert.assertNotNull(rating.getId());
-        Assert.assertTrue(rating.getOrderNumber() == 10);
+        Assertions.assertNotNull(rating.getId());
+        Assertions.assertEquals(10, (int) rating.getOrderNumber());
 
         // Update
         rating.setOrderNumber(20);
         rating = ratingService.save(rating);
-        Assert.assertTrue(rating.getOrderNumber() == 20);
+        Assertions.assertEquals(20, (int) rating.getOrderNumber());
 
         // Find
         List<Rating> listResult = ratingService.findAll();
-        Assert.assertTrue(listResult.size() > 0);
+        Assertions.assertTrue(listResult.size() > 0);
 
         // Delete
         Integer id = rating.getId();
         ratingService.delete(rating);
         Optional<Rating> ratingList = ratingService.findById(id);
-        Assert.assertFalse(ratingList.isPresent());
+        Assertions.assertFalse(ratingList.isPresent());
     }
 }
 

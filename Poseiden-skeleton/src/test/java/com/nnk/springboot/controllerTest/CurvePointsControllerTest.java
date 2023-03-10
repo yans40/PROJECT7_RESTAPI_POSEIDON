@@ -107,6 +107,25 @@ public class CurvePointsControllerTest {
                 .andExpect(model().attribute("curvePoint", curvePoint));
     }
 
+
+    @WithMockUser(authorities = "USER")
+    @Test
+    public void testCurvePointUpdate() throws Exception {
+        MultiValueMap<String,String> formCurvePointData =  new LinkedMultiValueMap<>();
+        formCurvePointData.add("curveId","12");
+        formCurvePointData.add("term","13d");
+        formCurvePointData.add("value","12");
+
+        String tradeId = String.valueOf(1);
+        mockMvc.perform(post("/curvePoint/update/"+ tradeId)
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .params(formCurvePointData)
+                        .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/curvePoint/list"));
+
+    }
+
     @WithMockUser(authorities = "USER")
     @Test
     public void testDeleteUser() throws Exception {

@@ -57,6 +57,19 @@ public class BidListControllerTest {
         bid.setAccount("accountTest");
         bid.setType("typetest");
         bid.setBidQuantity(10d);
+        bid.setBenchmark("benchmarktest");
+        bid.setBook("booktest");
+        bid.setBidQuantity(10d);
+        bid.setCommentary("commentary test");
+        bid.setSecurity("security test");
+        bid.setTrader("traderTest");
+        bid.setRevisionName("revicionTest");
+        bid.setDealName("dealTest");
+        bid.setCreationName("creaotionNameTest");
+        bid.setDealType("dealTypeTest");
+        bid.setSourceListId("sourListId");
+        bid.setSide("sideTest");
+        bid.setStatus("statusTest");
 
         bidList.add(bid);
         when(bidListService.findAll()).thenReturn(bidList);
@@ -106,6 +119,25 @@ public class BidListControllerTest {
                 .andExpect(view().name("bidList/update"))
                 .andExpect(model().attribute("bidList", bidList));
     }
+
+    @WithMockUser(authorities = "USER")
+    @Test
+    public void testBidListUpdate() throws Exception {
+        MultiValueMap<String,String> formBidListData =  new LinkedMultiValueMap<>();
+        formBidListData.add("account","testaccountupdated");
+        formBidListData.add("type","testtypeupdated");
+        formBidListData.add("bidQuantity","14d");
+
+        String tradeId = String.valueOf(1);
+        mockMvc.perform(post("/bidList/update/"+ tradeId)
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .params(formBidListData)
+                        .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/bidList/list"));
+
+    }
+
 
     @WithMockUser(authorities = "ADMIN")
     @Test

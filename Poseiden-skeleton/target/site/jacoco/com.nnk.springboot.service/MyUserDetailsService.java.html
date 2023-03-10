@@ -21,11 +21,11 @@ import java.util.Arrays;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-<span class="nc" id="L24">        User user = userRepository.findByUsername(username);</span>
+<span class="fc" id="L24">        User user = userRepository.findByUsername(username);</span>
 
-<span class="nc bnc" id="L26" title="All 2 branches missed.">        if (user == null){</span>
-<span class="nc" id="L27">            log.info(&quot;user not found&quot;);</span>
-<span class="nc" id="L28">            throw  new UsernameNotFoundException(&quot;Username not found&quot;+username);</span>
+<span class="pc bpc" id="L26" title="1 of 2 branches missed.">        if (user == null){</span>
+<span class="fc" id="L27">            log.info(&quot;user not found&quot;);</span>
+<span class="fc" id="L28">            throw  new UsernameNotFoundException(&quot;Username not found&quot;+username);</span>
         }
 <span class="nc" id="L30">        log.info(&quot;user found&quot;);</span>
 <span class="nc" id="L31">         return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(), Arrays.asList(new SimpleGrantedAuthority(user.getRole())));</span>

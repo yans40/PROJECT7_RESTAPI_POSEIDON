@@ -88,6 +88,7 @@ public class TradeControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/trade/list"));
     }
+
     @WithMockUser(authorities = "USER")
     @Test
     public void testShowTradeUpdateForm() throws Exception {
@@ -106,6 +107,24 @@ public class TradeControllerTest {
 
     @WithMockUser(authorities = "USER")
     @Test
+    public void testTradeUpdate() throws Exception {
+        MultiValueMap<String,String> formTradeData =  new LinkedMultiValueMap<>();
+        formTradeData.add("account","testaccountupdated");
+        formTradeData.add("type","testtypeupdated");
+        formTradeData.add("buyquantity","14d");
+
+        String tradeId = String.valueOf(1);
+        mockMvc.perform(post("/trade/update/"+ tradeId)
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .params(formTradeData)
+                        .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/trade/list"));
+
+    }
+
+    @WithMockUser(authorities = "USER")
+    @Test
     public void testDeleteTrade() throws Exception {
 
         Trade trade = new Trade();
@@ -120,6 +139,7 @@ public class TradeControllerTest {
         // Vérification que l'utilisateur a été supprimé
         verify(tradeService).delete(trade);
     }
+
 
     @BeforeEach
     public void setup(){

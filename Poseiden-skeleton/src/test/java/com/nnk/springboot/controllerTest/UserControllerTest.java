@@ -1,15 +1,27 @@
 package com.nnk.springboot.controllerTest;
 
+import com.nnk.springboot.controllers.UserController;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.service.UserService;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.OAuth2AccessToken;
+import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -18,9 +30,8 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.WebApplicationContext;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.security.Principal;
+import java.util.*;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -46,10 +57,11 @@ public class UserControllerTest {
     @MockBean
     private UserService userService;
 
+
     @WithMockUser(authorities = "ADMIN")
     @Test
     public void testHome() throws Exception {
-        // Given
+
         List<User> userList = new ArrayList<>();
         User user = new User();
 
@@ -60,11 +72,18 @@ public class UserControllerTest {
         userList.add(user);
         when(userService.findAll()).thenReturn(userList);
 
-        // When and then
+
         mockMvc.perform(get("/user/list"))
                 .andExpect(status().isOk());
     }
+    @WithMockUser(authorities = "ADMIN")
+    @Test
+    public void OAuth2GitClienthomeTest() throws Exception {
 
+        this.mockMvc.perform(get("/bidList/list"))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
     @WithMockUser(username = "michel", password = "azerty", authorities = "ADMIN")
     @Test
     public void should_return_user_list() throws Exception {
@@ -82,6 +101,16 @@ public class UserControllerTest {
                 .andDo(print())
                 .andExpect(status().isForbidden());
     }
+
+    @WithMockUser(authorities = "ADMIN")
+    @Test
+    public void should_return_Add_Page() throws Exception {
+
+        this.mockMvc.perform(get("/user/add"))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
 
     @WithMockUser(authorities = "ADMIN")
     @Test
@@ -115,6 +144,25 @@ public class UserControllerTest {
                 .andExpect(view().name("user/update"))
                 .andExpect(model().attribute("user", user));
     }
+
+    @WithMockUser(authorities = "ADMIN")
+    @Test
+    public void testUserUpdate() throws Exception {
+        MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
+        formData.add("fullname", "john doe");
+        formData.add("username", "john");
+        formData.add("password", "testpassword");
+
+        String tradeId = String.valueOf(1);
+        mockMvc.perform(post("/user/update/" + tradeId)
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .params(formData)
+                        .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/user/list"));
+
+    }
+
 
     @WithMockUser(authorities = "ADMIN")
     @Test

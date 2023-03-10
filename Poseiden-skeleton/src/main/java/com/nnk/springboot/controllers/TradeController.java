@@ -18,14 +18,12 @@ import java.util.List;
 public class TradeController {
     @Autowired
     private TradeService tradeService;
-    // TODO: Inject Trade service
 
     @RequestMapping("/trade/list")
     public String home(Model model)
     {
         List<Trade> tradeList=tradeService.findAll();
         model.addAttribute("tradeList",tradeList);
-        // TODO: find all Trade, add to model
         return "trade/list";
     }
 
@@ -43,7 +41,6 @@ public class TradeController {
             model.addAttribute("tradeList", tradeService.findAll());
             return "redirect:/trade/list";
         }
-        // TODO: check data valid and save to db, after saving return Trade list
         return "trade/add";
     }
 
@@ -51,7 +48,6 @@ public class TradeController {
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         Trade trade = tradeService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid trade Id:" + id));
         model.addAttribute("trade", trade);
-        // TODO: get Trade by Id and to model then show to the form
         return "trade/update";
     }
 
@@ -68,7 +64,6 @@ public class TradeController {
         trade.setBuyPrice(trade.getBuyPrice());
         tradeService.save(trade);
         model.addAttribute("tradeList", tradeService.findAll());
-        // TODO: check required fields, if valid call service to update Trade and return Trade list
         return "redirect:/trade/list";
     }
 
@@ -78,7 +73,6 @@ public class TradeController {
         Trade trade = tradeService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         tradeService.delete(trade);
         model.addAttribute("tradeList", tradeService.findAll());
-        // TODO: Find Trade by Id and delete the Trade, return to Trade list
         return "redirect:/trade/list";
     }
 }

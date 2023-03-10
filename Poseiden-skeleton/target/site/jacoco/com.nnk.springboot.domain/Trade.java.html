@@ -10,55 +10,55 @@ import java.sql.Timestamp;
 
 @Entity
 @Getter
-<span class="nc" id="L13">@Setter</span>
+<span class="pc" id="L13">@Setter</span>
 @Table(name = &quot;trade&quot;)
 public class Trade {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
-<span class="nc" id="L19">    Integer id;</span>
+<span class="fc" id="L19">    Integer id;</span>
     @Column
 <span class="nc" id="L21">    Integer trade_Id;</span>
     @Column
-<span class="nc" id="L23">    String account;</span>
+<span class="fc" id="L23">    String account;</span>
     @Column
-<span class="nc" id="L25">    String type;</span>
+<span class="fc" id="L25">    String type;</span>
     @Column
-<span class="nc" id="L27">    Double buyQuantity;</span>
+<span class="fc" id="L27">    Double buyQuantity;</span>
     @Column
-<span class="nc" id="L29">    Double sellQuantity;</span>
+<span class="fc" id="L29">    Double sellQuantity;</span>
     @Column
-<span class="nc" id="L31">    Double buyPrice;</span>
+<span class="fc" id="L31">    Double buyPrice;</span>
     @Column
-<span class="nc" id="L33">    Double sellPrice;</span>
+<span class="fc" id="L33">    Double sellPrice;</span>
     @Column
-<span class="nc" id="L35">    String benchmark;</span>
+<span class="fc" id="L35">    String benchmark;</span>
     @Column
 <span class="nc" id="L37">    Timestamp tradeDate;</span>
     @Column
-<span class="nc" id="L39">    String security;</span>
+<span class="fc" id="L39">    String security;</span>
     @Column
-<span class="nc" id="L41">    String status;</span>
+<span class="fc" id="L41">    String status;</span>
     @Column
-<span class="nc" id="L43">    String trader;</span>
+<span class="fc" id="L43">    String trader;</span>
     @Column
-<span class="nc" id="L45">    String book;</span>
+<span class="fc" id="L45">    String book;</span>
     @Column
-<span class="nc" id="L47">    String creationName;</span>
+<span class="fc" id="L47">    String creationName;</span>
     @Column
 <span class="nc" id="L49">    Timestamp creationDate;</span>
     @Column
-<span class="nc" id="L51">    String revisionName;</span>
+<span class="fc" id="L51">    String revisionName;</span>
     @Column
 <span class="nc" id="L53">    Timestamp revisionDate;</span>
     @Column
-<span class="nc" id="L55">    String dealName;</span>
+<span class="fc" id="L55">    String dealName;</span>
     @Column
-<span class="nc" id="L57">    String dealType;</span>
+<span class="fc" id="L57">    String dealType;</span>
     @Column
-<span class="nc" id="L59">    String sourceListId;</span>
+<span class="fc" id="L59">    String sourceListId;</span>
     @Column
-<span class="nc" id="L61">    String side;</span>
+<span class="fc" id="L61">    String side;</span>
 
 <span class="nc" id="L63">    public Trade(String tradeAccount, String type) {</span>
 <span class="nc" id="L64">    }</span>
@@ -67,6 +67,5 @@ public class Trade {
 
 <span class="fc" id="L68">    }</span>
 
-    // TODO: Map columns in data table TRADE with corresponding java fields
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -114,6 +114,27 @@ public class RuleNameControllerTest {
 
     @WithMockUser(authorities = "USER")
     @Test
+    public void testRuleNameControllerUpdate() throws Exception {
+        MultiValueMap<String,String> formRuleNameData =  new LinkedMultiValueMap<>();
+        formRuleNameData.add("name","nametest");
+        formRuleNameData.add("description","description test");
+        formRuleNameData.add("json","jsontest");
+        formRuleNameData.add("template","templatetest");
+        formRuleNameData.add("sqlStr","sqlStrtest");
+        formRuleNameData.add("sqlPart","sqlParttest");
+
+        String tradeId = String.valueOf(1);
+        mockMvc.perform(post("/ruleName/update/"+ tradeId)
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .params(formRuleNameData)
+                        .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/ruleName/list"));
+
+    }
+
+    @WithMockUser(authorities = "USER")
+    @Test
     public void testDeleteRuleName() throws Exception {
 
         RuleName ruleName = new RuleName();

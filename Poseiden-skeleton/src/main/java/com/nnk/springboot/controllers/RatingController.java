@@ -17,14 +17,14 @@ import java.util.List;
 
 @Controller
 public class RatingController {
-    // TODO: Inject Rating service
+
     @Autowired
     private RatingService ratingService;
 
     @RequestMapping("/rating/list")
     public String home(Model model)
     {
-        // TODO: find all Rating, add to model
+
         List<Rating> ratingList= ratingService.findAll();
         model.addAttribute("ratingList",ratingList);
         return "rating/list";
@@ -46,7 +46,7 @@ public class RatingController {
             model.addAttribute("ratingList", ratingService.findAll());
             return "redirect:/rating/list";
         }
-        // TODO: check data valid and save to db, after saving return Rating list
+
         return "rating/add";
     }
 
@@ -55,7 +55,7 @@ public class RatingController {
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
         Rating rating = ratingService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         model.addAttribute("rating", rating);
-        // TODO: get Rating by Id and to model then show to the form
+
         return "rating/update";
     }
 
@@ -72,7 +72,7 @@ public class RatingController {
         rating.setOrderNumber(rating.getOrderNumber());
         ratingService.save(rating);
         model.addAttribute("ratingList", ratingService.findAll());
-        // TODO: check required fields, if valid call service to update Rating and return Rating list
+
         return "redirect:/rating/list";
     }
 
@@ -81,7 +81,7 @@ public class RatingController {
         Rating rating = ratingService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         ratingService.delete(rating);
         model.addAttribute("ratings", ratingService.findAll());
-        // TODO: Find Rating by Id and delete the Rating, return to Rating list
+
         return "redirect:/rating/list";
     }
 }

@@ -14,7 +14,6 @@ import java.util.List;
 
 @Controller
 public class BidListController {
-    // TODO: Inject Bid service
     @Autowired
     private BidListService bidService;
 
@@ -40,7 +39,7 @@ public class BidListController {
             return "redirect:/bidList/list";
         }
         return "bidList/add";
-        // TODO: check data valid and save to db, after saving return bid list
+
     }
 
     @GetMapping("/bidList/update/{id}")
@@ -48,7 +47,7 @@ public class BidListController {
 
         BidList bidList = bidService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         model.addAttribute("bidList", bidList);
-        // TODO: get Bid by Id and to model then show to the form
+
         return "bidList/update";
     }
 
@@ -63,7 +62,7 @@ public class BidListController {
         bidList.setBidQuantity(bidList.getBidQuantity());
         bidService.save(bidList);
         model.addAttribute("bidLists", bidService.findAll());
-        // TODO: check required fields, if valid call service to update Bid and return list Bid
+
         return "redirect:/bidList/list";
     }
 
@@ -72,7 +71,6 @@ public class BidListController {
         BidList bidList = bidService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         bidService.delete(bidList);
         model.addAttribute("bidLists", bidService.findAll());
-        // TODO: Find Bid by Id and delete the bid, return to Bid list
         return "redirect:/bidList/list";
     }
 }

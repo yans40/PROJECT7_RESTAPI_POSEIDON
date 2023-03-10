@@ -113,6 +113,24 @@ public class RatingControllerTest {
 
     @WithMockUser(authorities = "USER")
     @Test
+    public void testRatingUpdate() throws Exception {
+        MultiValueMap<String,String> formRatingData =  new LinkedMultiValueMap<>();
+        formRatingData.add("moodysRating","moodystest");
+        formRatingData.add("fitchRating","fitchTest");
+        formRatingData.add("sandPRating","sandTest");
+        formRatingData.add("orderNumber","12");
+
+        String tradeId = String.valueOf(1);
+        mockMvc.perform(post("/rating/update/"+ tradeId)
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .params(formRatingData)
+                        .with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/rating/list"));
+
+    }
+    @WithMockUser(authorities = "USER")
+    @Test
     public void testDeleteUser() throws Exception {
 
         Rating rating = new Rating();

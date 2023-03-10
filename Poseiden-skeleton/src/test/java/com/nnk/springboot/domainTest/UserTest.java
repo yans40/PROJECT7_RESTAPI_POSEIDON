@@ -4,6 +4,7 @@ import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
 import org.junit.Assert;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,7 +18,7 @@ public class UserTest {
     UserRepository userRepository;
 
     @Test
-    public void userTest() {
+    void userTest() {
 
         User user = new User();
         user.setFullname("Alexandre Dumas");
@@ -26,23 +27,23 @@ public class UserTest {
 
         //Save
         user = userRepository.save(user);
-        Assert.assertNotNull(user.getId());
-        Assert.assertTrue(user.getUsername()=="Alex");
+        Assertions.assertNotNull(user.getId());
+        Assertions.assertSame("Alex", user.getUsername());
 
         //Update
         user.setUsername("Al");
         user= userRepository.save(user);
-        Assert.assertTrue(user.getUsername()=="Al");
+        Assertions.assertSame("Al", user.getUsername());
 
         //Find
         List<User> userList = userRepository.findAll();
-        Assert.assertTrue(userList.size()>0);
+        Assertions.assertTrue(userList.size()>0);
 
         // Delete
         Integer id = user.getId();
         userRepository.delete(user);
         Optional<User> user1 = userRepository.findById(id);
-        Assert.assertFalse(user1.isPresent());
+        Assertions.assertFalse(user1.isPresent());
     }
 
 }

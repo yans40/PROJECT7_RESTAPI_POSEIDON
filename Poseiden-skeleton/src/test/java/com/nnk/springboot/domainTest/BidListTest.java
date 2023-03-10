@@ -4,6 +4,7 @@ import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.repositories.BidListRepository;
 
 import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,7 +14,8 @@ import java.util.Optional;
 
 
 @SpringBootTest
-public class BidListTest {
+class BidListTest {
+
     @Autowired
     private BidListRepository bidListRepository;
 
@@ -31,7 +33,8 @@ public class BidListTest {
 		bid.setSecurity("security test");
 		bid.setTrader("traderTest");
 		bid.setRevisionName("revicionTest");
-		bid.setDealName("dealTest");
+        bid.setDealName("dealTest");
+        bid.setCreationName("creaotionNameTest");
 		bid.setDealType("dealTypeTest");
 		bid.setSourceListId("sourListId");
 		bid.setSide("sideTest");
@@ -39,36 +42,40 @@ public class BidListTest {
 
         // Save
         bid = bidListRepository.save(bid);
-        Assert.assertNotNull(bid.getId());
-        Assert.assertEquals(bid.getBidQuantity(), 10d, 10d);
-        Assert.assertNotNull(bid.getAskQuantity());
-		Assert.assertNotNull(bid.getBenchmark());
-		Assert.assertNotNull(bid.getBook());
-		Assert.assertNotNull(bid.getBenchmark());
-		Assert.assertNotNull(bid.getAsk());
-		Assert.assertNotNull(bid.getCommentary());
-		Assert.assertNotNull(bid.getSecurity());
-		Assert.assertNotNull(bid.getTrader());
-		Assert.assertNotNull(bid.getRevisionName());
-		Assert.assertNotNull(bid.getDealName());
-		Assert.assertNotNull(bid.getDealType());
-		Assert.assertNotNull(bid.getSourceListId());
-		Assert.assertNotNull(bid.getSide());
-		Assert.assertNotNull(bid.getStatus());
+        Assertions.assertNotNull(bid.getId());
+        Assertions.assertNotNull(bid.getAccount());
+        Assertions.assertEquals(bid.getBidQuantity(), 10d, 10d);
+        Assertions.assertNotNull(bid.getAskQuantity());
+		Assertions.assertNotNull(bid.getBenchmark());
+		Assertions.assertNotNull(bid.getBook());
+		Assertions.assertNotNull(bid.getBenchmark());
+		Assertions.assertNotNull(bid.getAsk());
+		Assertions.assertNotNull(bid.getCommentary());
+		Assertions.assertNotNull(bid.getSecurity());
+		Assertions.assertNotNull(bid.getTrader());
+		Assertions.assertNotNull(bid.getRevisionName());
+        Assertions.assertNotNull(bid.getDealName());
+        Assertions.assertNotNull(bid.getCreationName());
+		Assertions.assertNotNull(bid.getDealType());
+		Assertions.assertNotNull(bid.getSourceListId());
+		Assertions.assertNotNull(bid.getSide());
+		Assertions.assertEquals(bid.getStatus(),"statusTest","statusTest");
 
 		// Update
         bid.setBidQuantity(20d);
         bid = bidListRepository.save(bid);
-        Assert.assertEquals(bid.getBidQuantity(), 20d, 20d);
+        bid.setStatus("updatedStatus");
+        Assertions.assertEquals(bid.getBidQuantity(), 20d, 20d);
+        Assertions.assertEquals(bid.getStatus(), "updatedStatus", "updatedStatus");
 
         // Find
         List<BidList> listResult = bidListRepository.findAll();
-        Assert.assertTrue(listResult.size() > 0);
+        Assertions.assertTrue(listResult.size() > 0);
 
         // Delete
         Integer id = bid.getId();
         bidListRepository.delete(bid);
         Optional<BidList> bidList = bidListRepository.findById(id);
-        Assert.assertFalse(bidList.isPresent());
+        Assertions.assertFalse(bidList.isPresent());
     }
 }

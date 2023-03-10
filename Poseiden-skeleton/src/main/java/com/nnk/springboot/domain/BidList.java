@@ -70,5 +70,5 @@ public class BidList {
     public BidList() {
 
     }
-    // TODO: Map columns in data table BIDLIST with corresponding java fields
+
 }

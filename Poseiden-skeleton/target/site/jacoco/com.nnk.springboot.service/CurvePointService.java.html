@@ -14,19 +14,19 @@ import java.util.Optional;
     private CurvePointRepository curvePointRepository;
 
     public List&lt;CurvePoint&gt; findAll(){
-<span class="fc" id="L17">        return curvePointRepository.findAll();</span>
+<span class="nc" id="L17">        return curvePointRepository.findAll();</span>
     }
 
     public CurvePoint save(CurvePoint curvePoint){
-<span class="fc" id="L21">        return curvePointRepository.save(curvePoint);</span>
+<span class="nc" id="L21">        return curvePointRepository.save(curvePoint);</span>
     }
 
     public Optional&lt;CurvePoint&gt; findById(Integer id) {
-<span class="fc" id="L25">        return curvePointRepository.findById(id);</span>
+<span class="nc" id="L25">        return curvePointRepository.findById(id);</span>
     }
 
     public void delete(CurvePoint curvePoint) {
-<span class="fc" id="L29">        curvePointRepository.delete(curvePoint);</span>
-<span class="fc" id="L30">    }</span>
+<span class="nc" id="L29">        curvePointRepository.delete(curvePoint);</span>
+<span class="nc" id="L30">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

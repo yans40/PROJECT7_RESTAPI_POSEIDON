@@ -38,10 +38,10 @@ public class UserController {
 
     @RequestMapping(value = &quot;/user/list&quot;, method = RequestMethod.GET)
     public String home(Model model) {
-<span class="nc" id="L41">        log.info(&quot;display user list&quot;);</span>
-<span class="nc" id="L42">        List&lt;User&gt; users = userService.findAll();</span>
-<span class="nc" id="L43">        model.addAttribute(&quot;users&quot;, users);</span>
-<span class="nc" id="L44">        return &quot;user/list&quot;;</span>
+<span class="fc" id="L41">        log.info(&quot;display user list&quot;);</span>
+<span class="fc" id="L42">        List&lt;User&gt; users = userService.findAll();</span>
+<span class="fc" id="L43">        model.addAttribute(&quot;users&quot;, users);</span>
+<span class="fc" id="L44">        return &quot;user/list&quot;;</span>
     }
 
     @RequestMapping(&quot;/*&quot;)
@@ -79,51 +79,51 @@ public class UserController {
 
     @GetMapping(&quot;/user/add&quot;)
     public String addUser(@NotNull Model model) {
-<span class="nc" id="L82">        User user = new User();</span>
-<span class="nc" id="L83">        model.addAttribute(&quot;user&quot;, user);</span>
-<span class="nc" id="L84">        return &quot;user/add&quot;;</span>
+<span class="fc" id="L82">        User user = new User();</span>
+<span class="fc" id="L83">        model.addAttribute(&quot;user&quot;, user);</span>
+<span class="fc" id="L84">        return &quot;user/add&quot;;</span>
     }
 
     @PostMapping(&quot;/user/validate&quot;)
     public String validate(@Valid User user, BindingResult result, Model model) {
-<span class="nc bnc" id="L89" title="All 2 branches missed.">        if (!result.hasErrors()) {</span>
-<span class="nc" id="L90">            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));</span>
-<span class="nc" id="L91">            userService.save(user);log.info(&quot;user sauvegardé avec password encodé&quot;);</span>
-<span class="nc" id="L92">            model.addAttribute(&quot;users&quot;, userService.findAll());</span>
-<span class="nc" id="L93">            return &quot;redirect:/user/list&quot;;</span>
+<span class="pc bpc" id="L89" title="1 of 2 branches missed.">        if (!result.hasErrors()) {</span>
+<span class="fc" id="L90">            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));</span>
+<span class="fc" id="L91">            userService.save(user);log.info(&quot;user sauvegardé avec password encodé&quot;);</span>
+<span class="fc" id="L92">            model.addAttribute(&quot;users&quot;, userService.findAll());</span>
+<span class="fc" id="L93">            return &quot;redirect:/user/list&quot;;</span>
         }
 <span class="nc" id="L95">        return &quot;user/add&quot;;</span>
     }
 
     @GetMapping(&quot;/user/update/{id}&quot;)
     public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model) {
-<span class="nc" id="L100">        User user = userService.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid user Id:&quot; + id));</span>
-<span class="nc" id="L101">        user.setPassword(&quot;&quot;);</span>
-<span class="nc" id="L102">        model.addAttribute(&quot;user&quot;, user);</span>
-<span class="nc" id="L103">        return &quot;user/update&quot;;</span>
+<span class="pc" id="L100">        User user = userService.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid user Id:&quot; + id));</span>
+<span class="fc" id="L101">        user.setPassword(&quot;&quot;);</span>
+<span class="fc" id="L102">        model.addAttribute(&quot;user&quot;, user);</span>
+<span class="fc" id="L103">        return &quot;user/update&quot;;</span>
     }
 
     @PostMapping(&quot;/user/update/{id}&quot;)
     public String updateUser(@PathVariable(&quot;id&quot;) Integer id, @Valid User user,
                              BindingResult result, Model model) {
-<span class="nc bnc" id="L109" title="All 2 branches missed.">        if (result.hasErrors()) {</span>
+<span class="pc bpc" id="L109" title="1 of 2 branches missed.">        if (result.hasErrors()) {</span>
 <span class="nc" id="L110">            return &quot;user/update&quot;;</span>
         }
 
-<span class="nc" id="L113">        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();</span>
-<span class="nc" id="L114">        user.setPassword(encoder.encode(user.getPassword()));</span>
-<span class="nc" id="L115">        user.setId(id);</span>
-<span class="nc" id="L116">        userService.save(user);</span>
-<span class="nc" id="L117">        model.addAttribute(&quot;users&quot;, userService.findAll());</span>
-<span class="nc" id="L118">        return &quot;redirect:/user/list&quot;;</span>
+<span class="fc" id="L113">        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();</span>
+<span class="fc" id="L114">        user.setPassword(encoder.encode(user.getPassword()));</span>
+<span class="fc" id="L115">        user.setId(id);</span>
+<span class="fc" id="L116">        userService.save(user);</span>
+<span class="fc" id="L117">        model.addAttribute(&quot;users&quot;, userService.findAll());</span>
+<span class="fc" id="L118">        return &quot;redirect:/user/list&quot;;</span>
     }
 
     @GetMapping(&quot;/user/delete/{id}&quot;)
     public String deleteUser(@PathVariable(&quot;id&quot;) Integer id, Model model) {
-<span class="nc" id="L123">        User user = userService.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid user Id:&quot; + id));</span>
-<span class="nc" id="L124">        userService.delete(user);</span>
-<span class="nc" id="L125">        model.addAttribute(&quot;users&quot;, userService.findAll());</span>
-<span class="nc" id="L126">        return &quot;redirect:/user/list&quot;;</span>
+<span class="pc" id="L123">        User user = userService.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid user Id:&quot; + id));</span>
+<span class="fc" id="L124">        userService.delete(user);</span>
+<span class="fc" id="L125">        model.addAttribute(&quot;users&quot;, userService.findAll());</span>
+<span class="fc" id="L126">        return &quot;redirect:/user/list&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

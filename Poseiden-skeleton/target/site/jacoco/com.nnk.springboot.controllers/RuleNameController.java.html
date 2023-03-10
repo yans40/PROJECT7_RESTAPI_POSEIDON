@@ -18,67 +18,66 @@ import java.util.List;
 <span class="fc" id="L18">public class RuleNameController {</span>
     @Autowired
     private RuleNameService ruleNameService;
-    // TODO: Inject RuleName service
+
 
     @RequestMapping(&quot;/ruleName/list&quot;)
     public String home(Model model) {
-        // TODO: find all RuleName, add to model
-<span class="nc" id="L26">        List&lt;RuleName&gt; ruleNameList = ruleNameService.findAll();</span>
-<span class="nc" id="L27">        model.addAttribute(&quot;rulenamelist&quot;, ruleNameList);</span>
-<span class="nc" id="L28">        return &quot;ruleName/list&quot;;</span>
+
+<span class="fc" id="L26">        List&lt;RuleName&gt; ruleNameList = ruleNameService.findAll();</span>
+<span class="fc" id="L27">        model.addAttribute(&quot;rulenamelist&quot;, ruleNameList);</span>
+<span class="fc" id="L28">        return &quot;ruleName/list&quot;;</span>
     }
 
     @GetMapping(&quot;/ruleName/add&quot;)
     public String addRuleForm(Model model) {
-<span class="nc" id="L33">        RuleName ruleName = new RuleName();</span>
-<span class="nc" id="L34">        model.addAttribute(&quot;ruleName&quot;, ruleName);</span>
-<span class="nc" id="L35">        return &quot;ruleName/add&quot;;</span>
+<span class="fc" id="L33">        RuleName ruleName = new RuleName();</span>
+<span class="fc" id="L34">        model.addAttribute(&quot;ruleName&quot;, ruleName);</span>
+<span class="fc" id="L35">        return &quot;ruleName/add&quot;;</span>
     }
 
     @PostMapping(&quot;/ruleName/validate&quot;)
     public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
-<span class="nc bnc" id="L40" title="All 2 branches missed.">        if (!result.hasErrors()) {</span>
-<span class="nc" id="L41">            ruleNameService.save(ruleName);</span>
-<span class="nc" id="L42">            model.addAttribute(&quot;ratingList&quot;, ruleNameService.findAll());</span>
-<span class="nc" id="L43">            return &quot;redirect:/ruleName/list&quot;;</span>
+<span class="pc bpc" id="L40" title="1 of 2 branches missed.">        if (!result.hasErrors()) {</span>
+<span class="fc" id="L41">            ruleNameService.save(ruleName);</span>
+<span class="fc" id="L42">            model.addAttribute(&quot;ratingList&quot;, ruleNameService.findAll());</span>
+<span class="fc" id="L43">            return &quot;redirect:/ruleName/list&quot;;</span>
         }
-        // TODO: check data valid and save to db, after saving return RuleName list
+
 <span class="nc" id="L46">        return &quot;ruleName/add&quot;;</span>
     }
 
     @GetMapping(&quot;/ruleName/update/{id}&quot;)
     public String showUpdateForm(@PathVariable(&quot;id&quot;) Integer id, Model model) {
-<span class="nc" id="L51">        RuleName ruleName = ruleNameService.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid user Id:&quot; + id));</span>
-<span class="nc" id="L52">        model.addAttribute(&quot;ruleName&quot;, ruleName);</span>
-        // TODO: get RuleName by Id and to model then show to the form
-<span class="nc" id="L54">        return &quot;ruleName/update&quot;;</span>
+<span class="pc" id="L51">        RuleName ruleName = ruleNameService.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid user Id:&quot; + id));</span>
+<span class="fc" id="L52">        model.addAttribute(&quot;ruleName&quot;, ruleName);</span>
+
+<span class="fc" id="L54">        return &quot;ruleName/update&quot;;</span>
     }
 
     @PostMapping(&quot;/ruleName/update/{id}&quot;)
     public String updateRuleName(@PathVariable(&quot;id&quot;) Integer id, @Valid RuleName ruleName,
                                  BindingResult result, Model model) {
-<span class="nc bnc" id="L60" title="All 2 branches missed.">        if (result.hasErrors()) {</span>
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">        if (result.hasErrors()) {</span>
 <span class="nc" id="L61">            return &quot;rating/update&quot;;</span>
         }
-<span class="nc" id="L63">        ruleName.setId(id);</span>
-<span class="nc" id="L64">        ruleName.setName(ruleName.getName());</span>
-<span class="nc" id="L65">        ruleName.setJson(ruleName.getJson());</span>
-<span class="nc" id="L66">        ruleName.setSqlStr(ruleName.getSqlStr());</span>
-<span class="nc" id="L67">        ruleName.setTemplate(ruleName.getTemplate());</span>
-<span class="nc" id="L68">        ruleName.setDescription(ruleName.getDescription());</span>
-<span class="nc" id="L69">        ruleNameService.save(ruleName);</span>
-<span class="nc" id="L70">        model.addAttribute(&quot;ruleNameList&quot;, ruleNameService.findAll());</span>
-        // TODO: check required fields, if valid call service to update RuleName and return RuleName list
-<span class="nc" id="L72">        return &quot;redirect:/ruleName/list&quot;;</span>
+<span class="fc" id="L63">        ruleName.setId(id);</span>
+<span class="fc" id="L64">        ruleName.setName(ruleName.getName());</span>
+<span class="fc" id="L65">        ruleName.setJson(ruleName.getJson());</span>
+<span class="fc" id="L66">        ruleName.setSqlStr(ruleName.getSqlStr());</span>
+<span class="fc" id="L67">        ruleName.setTemplate(ruleName.getTemplate());</span>
+<span class="fc" id="L68">        ruleName.setDescription(ruleName.getDescription());</span>
+<span class="fc" id="L69">        ruleNameService.save(ruleName);</span>
+<span class="fc" id="L70">        model.addAttribute(&quot;ruleNameList&quot;, ruleNameService.findAll());</span>
+<span class="fc" id="L71">        return &quot;redirect:/ruleName/list&quot;;</span>
     }
 
     @GetMapping(&quot;/ruleName/delete/{id}&quot;)
     public String deleteRuleName(@PathVariable(&quot;id&quot;) Integer id, Model model) {
-<span class="nc" id="L77">        RuleName ruleName = ruleNameService.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid user Id:&quot; + id));</span>
-<span class="nc" id="L78">        ruleNameService.delete(ruleName);</span>
-<span class="nc" id="L79">        model.addAttribute(&quot;ruleNameList&quot;, ruleNameService.findAll());</span>
-        // TODO: Find RuleName by Id and delete the RuleName, return to Rule list
-<span class="nc" id="L81">        return &quot;redirect:/ruleName/list&quot;;</span>
+<span class="pc" id="L76">        RuleName ruleName = ruleNameService.findById(id).orElseThrow(() -&gt; new IllegalArgumentException(&quot;Invalid user Id:&quot; + id));</span>
+<span class="fc" id="L77">        ruleNameService.delete(ruleName);</span>
+<span class="fc" id="L78">        model.addAttribute(&quot;ruleNameList&quot;, ruleNameService.findAll());</span>
+
+<span class="fc" id="L80">        return &quot;redirect:/ruleName/list&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
