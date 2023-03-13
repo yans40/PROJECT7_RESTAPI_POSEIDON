@@ -6,8 +6,10 @@ import com.nnk.springboot.repositories.CurvePointRepository;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -26,7 +28,6 @@ public class CurvePointTest {
 
     @Test
     public void curvePointTest() {
-        Timestamp creationDate = Timestamp.valueOf("2023-02-18 12:34:56");
 
         CurvePoint curvePoint = new CurvePoint();
         curvePoint.setId(1);

@@ -4,6 +4,7 @@ import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.service.TradeService;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,6 +16,8 @@ import java.util.Optional;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class TradeServiceTest {
+
+
 
     @Autowired
     private TradeService tradeService;
@@ -28,12 +31,12 @@ public class TradeServiceTest {
         // Save
         trade = tradeService.save(trade);
         Assert.assertNotNull(trade.getId());
-        Assert.assertTrue(trade.getAccount().equals("Trade Account"));
+        Assert.assertEquals("Trade Account", trade.getAccount());
 
         // Update
         trade.setAccount("Trade Account Update");
         trade = tradeService.save(trade);
-        Assert.assertTrue(trade.getAccount().equals("Trade Account Update"));
+        Assert.assertEquals("Trade Account Update", trade.getAccount());
 
         // Find
         List<Trade> listResult = tradeService.findAll();

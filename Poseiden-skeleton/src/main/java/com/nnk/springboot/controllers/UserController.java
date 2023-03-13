@@ -36,7 +36,7 @@ public class UserController {
         this.authorizedClientService = authorizedClientService;
     }
 
-    @RequestMapping(value = "/user/list", method = RequestMethod.GET)
+    @GetMapping(value = "/user/list")
     public String home(Model model) {
         log.info("display user list");
         List<User> users = userService.findAll();

@@ -1,6 +1,7 @@
 com\nnk\springboot\repositories\RatingRepository.class
 com\nnk\springboot\service\BidListService.class
 com\nnk\springboot\service\TradeService.class
+com\nnk\springboot\service\OAuth2AuthorizedClientService.class
 com\nnk\springboot\controllers\RatingController.class
 com\nnk\springboot\domain\BidList.class
 com\nnk\springboot\controllers\LoginController.class
