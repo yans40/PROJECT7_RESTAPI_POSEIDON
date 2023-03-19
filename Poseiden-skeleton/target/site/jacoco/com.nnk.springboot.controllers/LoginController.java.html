@@ -14,34 +14,34 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping(&quot;app&quot;)
 <span class="fc" id="L15">public class LoginController {</span>
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @GetMapping(&quot;login&quot;)
-    public ModelAndView login() {
-<span class="nc" id="L22">        ModelAndView mav = new ModelAndView();</span>
-<span class="nc" id="L23">        mav.setViewName(&quot;login&quot;);</span>
-<span class="nc" id="L24">        return mav;</span>
-    }
-
-    @GetMapping(&quot;secure/article-details&quot;)
-    public ModelAndView getAllUserArticles() {
-<span class="nc" id="L29">        ModelAndView mav = new ModelAndView();</span>
-<span class="nc" id="L30">        mav.addObject(&quot;users&quot;, userRepository.findAll());</span>
-<span class="nc" id="L31">        mav.setViewName(&quot;user/list&quot;);</span>
-<span class="nc" id="L32">        return mav;</span>
-    }
-
-    @GetMapping(&quot;/error&quot;)
-    public ModelAndView error(HttpServletResponse response) {
-<span class="nc" id="L37">        ModelAndView mav = new ModelAndView();</span>
-<span class="nc bnc" id="L38" title="All 2 branches missed.">        if (response.getStatus()== HttpStatus.FORBIDDEN.value()){</span>
-<span class="nc" id="L39">            String errorMessage= &quot;You are not authorized for the requested data.&quot;;</span>
-<span class="nc" id="L40">            mav.addObject(&quot;errorMsg&quot;, errorMessage);</span>
-<span class="nc" id="L41">            mav.setViewName(&quot;403&quot;);</span>
-        }
-
-<span class="nc" id="L44">        return mav;</span>
-    }
+//    @Autowired
+//    private UserRepository userRepository;
+//
+//    @GetMapping(&quot;login&quot;)
+//    public ModelAndView login() {
+//        ModelAndView mav = new ModelAndView();
+//        mav.setViewName(&quot;login&quot;);
+//        return mav;
+//    }
+//
+//    @GetMapping(&quot;secure/article-details&quot;)
+//    public ModelAndView getAllUserArticles() {
+//        ModelAndView mav = new ModelAndView();
+//        mav.addObject(&quot;users&quot;, userRepository.findAll());
+//        mav.setViewName(&quot;user/list&quot;);
+//        return mav;
+//    }
+//
+//    @GetMapping(&quot;/error&quot;)
+//    public ModelAndView error(HttpServletResponse response) {
+//        ModelAndView mav = new ModelAndView();
+//        if (response.getStatus()== HttpStatus.FORBIDDEN.value()){
+//            String errorMessage= &quot;You are not authorized for the requested data.&quot;;
+//            mav.addObject(&quot;errorMsg&quot;, errorMessage);
+//            mav.setViewName(&quot;403&quot;);
+//        }
+//
+//        return mav;
+//    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

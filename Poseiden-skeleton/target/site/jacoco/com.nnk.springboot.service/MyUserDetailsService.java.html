@@ -21,7 +21,7 @@ import java.util.Arrays;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-<span class="fc" id="L24">        User user = userRepository.findByUsername(username);</span>
+<span class="fc" id="L24">        User user= userRepository.findUserByUsername(username);</span>
 
 <span class="pc bpc" id="L26" title="1 of 2 branches missed.">        if (user == null){</span>
 <span class="fc" id="L27">            log.info(&quot;user not found&quot;);</span>

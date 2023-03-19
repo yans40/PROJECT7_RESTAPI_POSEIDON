@@ -14,7 +14,9 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -29,6 +31,8 @@ public class UserController {
     private final OAuth2AuthorizedClientService authorizedClientService;
     @Autowired
     private UserService userService;
+
+
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -44,38 +48,26 @@ public class UserController {
         return "user/list";
     }
 
-    @RequestMapping("/*")
-    public String OAuth2GitClienthome(Principal user) {
-
-        StringBuffer userInfo = new StringBuffer();
-        if (user instanceof OAuth2AuthenticationToken) {
-
-            userInfo.append(getOAuth2LoginInfo(user));
-        }
-
-        return userInfo.toString();
-    }
-
-    private StringBuffer getOAuth2LoginInfo(Principal user) {
-        StringBuffer protectedInfo = new StringBuffer();
-
-        OAuth2AuthenticationToken authToken = ((OAuth2AuthenticationToken) user);
-
-        OAuth2AuthorizedClient authClient = this.authorizedClientService.loadAuthorizedClient(authToken.getAuthorizedClientRegistrationId(), authToken.getName());
-
-        if (authToken.isAuthenticated()) {
-
-            Map<String, Object> userAttributes = ((DefaultOAuth2User) authToken.getPrincipal()).getAttributes();
-            String userToken = authClient.getAccessToken().getTokenValue();
-
-            protectedInfo.append("Welcome, " + userAttributes.get("name") + "<br><br>");
-            protectedInfo.append("Acces Token: " + userToken + "<br><br>");
-            OAuth2User principal = ((OAuth2AuthenticationToken) user).getPrincipal();
-
-        }
-        return protectedInfo;
-
-    }
+//    private StringBuffer getOAuth2LoginInfo(Principal user) {
+//        StringBuffer protectedInfo = new StringBuffer();
+//
+//        OAuth2AuthenticationToken authToken = ((OAuth2AuthenticationToken) user);
+//
+//        OAuth2AuthorizedClient authClient = this.authorizedClientService.loadAuthorizedClient(authToken.getAuthorizedClientRegistrationId(), authToken.getName());
+//
+//        if (authToken.isAuthenticated()) {
+//
+//            Map<String, Object> userAttributes = ((DefaultOAuth2User) authToken.getPrincipal()).getAttributes();
+//            String userToken = authClient.getAccessToken().getTokenValue();
+//
+//            protectedInfo.append("Welcome, " + userAttributes.get("name") + "<br><br>");
+//            protectedInfo.append("Acces Token: " + userToken + "<br><br>");
+//            OAuth2User principal = ((OAuth2AuthenticationToken) user).getPrincipal();
+//
+//        }
+//        return protectedInfo;
+//
+//    }
 
     @GetMapping("/user/add")
     public String addUser(@NotNull Model model) {
@@ -88,7 +80,8 @@ public class UserController {
     public String validate(@Valid User user, BindingResult result, Model model) {
         if (!result.hasErrors()) {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-            userService.save(user);log.info("user sauvegardé avec password encodé");
+            userService.save(user);
+            log.info("user sauvegardé avec password encodé");
             model.addAttribute("users", userService.findAll());
             return "redirect:/user/list";
         }
@@ -122,6 +115,7 @@ public class UserController {
     public String deleteUser(@PathVariable("id") Integer id, Model model) {
         User user = userService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         userService.delete(user);
+        log.info("user deleted");
         model.addAttribute("users", userService.findAll());
         return "redirect:/user/list";
     }

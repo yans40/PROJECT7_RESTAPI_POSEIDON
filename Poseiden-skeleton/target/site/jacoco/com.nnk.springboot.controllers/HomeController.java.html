@@ -14,29 +14,12 @@ import java.util.Collection;
 @Controller
 <span class="fc" id="L15">public class HomeController</span>
 {
-	@GetMapping(&quot;/home&quot;)
-	public String homeDispatch(Model model, Authentication authentication){
 
-<span class="nc" id="L20">		Collection&lt;? extends GrantedAuthority&gt; authorities =authentication.getAuthorities();</span>
-<span class="nc bnc" id="L21" title="All 2 branches missed.">		for(GrantedAuthority authority:authorities){</span>
-<span class="nc bnc" id="L22" title="All 2 branches missed.">			if (authority.getAuthority().equals((&quot;ADMIN&quot;))){</span>
-<span class="nc" id="L23">				return &quot;redirect:/admin/home&quot;;</span>
-			}
-<span class="nc" id="L25">		}</span>
-<span class="nc" id="L26">		return &quot;redirect:/&quot;;</span>
-	}
 	@RequestMapping(&quot;/&quot;)
-	public String home(Model model)
+	public String home()
 	{
-<span class="nc" id="L31">		return &quot;home&quot;;</span>
+<span class="nc" id="L21">		return &quot;home&quot;;</span>
 	}
-
-	@RequestMapping(&quot;/admin/home&quot;)
-	public String adminHome(Model model)
-	{
-<span class="nc" id="L37">		return &quot;redirect:/bidList/list&quot;;</span>
-	}
-
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

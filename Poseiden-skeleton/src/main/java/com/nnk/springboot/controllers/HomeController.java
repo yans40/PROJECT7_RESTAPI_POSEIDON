@@ -14,28 +14,11 @@ import java.util.Collection;
 @Controller
 public class HomeController
 {
-	@GetMapping("/home")
-	public String homeDispatch(Model model, Authentication authentication){
 
-		Collection<? extends GrantedAuthority> authorities =authentication.getAuthorities();
-		for(GrantedAuthority authority:authorities){
-			if (authority.getAuthority().equals(("ADMIN"))){
-				return "redirect:/admin/home";
-			}
-		}
-		return "redirect:/";
-	}
 	@RequestMapping("/")
-	public String home(Model model)
+	public String home()
 	{
 		return "home";
 	}
-
-	@RequestMapping("/admin/home")
-	public String adminHome(Model model)
-	{
-		return "redirect:/bidList/list";
-	}
-
 
 }
