@@ -60,6 +60,7 @@ public class UserController {
 //            Map<String, Object> userAttributes = ((DefaultOAuth2User) authToken.getPrincipal()).getAttributes();
 //            String userToken = authClient.getAccessToken().getTokenValue();
 //
+//
 //            protectedInfo.append("Welcome, " + userAttributes.get("name") + "<br><br>");
 //            protectedInfo.append("Acces Token: " + userToken + "<br><br>");
 //            OAuth2User principal = ((OAuth2AuthenticationToken) user).getPrincipal();
