@@ -26,20 +26,21 @@ public class BidListController {
 
     @RequestMapping("/bidList/list")
     public String home(Model model, Principal principal) {
-        log.info("return la bidlist");
 
-        if (principal instanceof OAuth2AuthenticationToken) {
-            OAuth2AuthenticationToken authToken = (OAuth2AuthenticationToken) principal;
-            Map<String, Object> userAttributes = ((DefaultOAuth2User) authToken.getPrincipal()).getAttributes();
-            String OauthUser = (String) userAttributes.get("login");
+        if (principal instanceof OAuth2AuthenticationToken) { // si le principal est issu d'une connexion par OAuth2...
+            log.info("authentification avec OAuth2");
+            OAuth2AuthenticationToken authToken = (OAuth2AuthenticationToken) principal;// on instancie un objet OAuth2AuthenticationToken ...
+            Map<String, Object> userAttributes = ((DefaultOAuth2User) authToken.getPrincipal()).getAttributes();// on Map les user Attributes...
+            String OauthUser = (String) userAttributes.get("login");// on récupère le login
 
             model.addAttribute("oauthUser", OauthUser);
-        } else if (principal instanceof UsernamePasswordAuthenticationToken) {
-            UsernamePasswordAuthenticationToken token = ((UsernamePasswordAuthenticationToken) principal);
+        } else if (principal instanceof UsernamePasswordAuthenticationToken) {// si le principal est issu d'une connexion d'une connexion standard ...
+            log.info("authentification avec username & password");
+            UsernamePasswordAuthenticationToken token = ((UsernamePasswordAuthenticationToken) principal);// on instancie un objet UsernamePasswordAuthenticationToken...
 
-            model.addAttribute("springUsername", token.getName());
+            model.addAttribute("springUsername", token.getName()); // on récupère par la méthode getName le username
         }
-
+        log.info("return la bidlist");
         List<BidList> bidList = bidService.findAll();
         model.addAttribute("bidList", bidList);
         return "bidList/list";
@@ -74,8 +75,7 @@ public class BidListController {
     }
 
     @PostMapping("/bidList/update/{id}")
-    public String updateBid(@PathVariable("id") Integer id, @Valid BidList bidList,
-                            BindingResult result, Model model) {
+    public String updateBid(@PathVariable("id") Integer id, @Valid BidList bidList, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "user/update";
         }

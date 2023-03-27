@@ -23,7 +23,7 @@
 	<div class="row">
 		<form action="#" th:action="@{/curvePoint/validate}" th:object="${curvePoint}" method="post" class="form-horizontal" style="width: 100%">
 			<div class="form-group">
-				<label for="curveId" class="col-sm-2 control-label">curvePointId</label>
+				<label for="curveId" class="col-sm-2 control-label">curveId</label>
 				<div class="col-sm-10">
 					<input type="number" th:field="*{curveId}" id="curveId" placeholder="curveId" class="col-4" required
 						   minlength="2" maxlength="80">
@@ -33,7 +33,7 @@
 			<div class="form-group">
 				<label for="term" class="col-sm-2 control-label">Term</label>
 				<div class="col-sm-10">
-					<input type="text" th:field="*{term}" id="term" placeholder="Term" class="col-4" required
+					<input type="number" th:field="*{term}" id="term" placeholder="Term" class="col-4" required
 						   minlength="2" maxlength="80">
 					<p class="text-danger" th:if="${#fields.hasErrors('term')}" th:errors="*{term}"></p>
 				</div>
@@ -41,7 +41,7 @@
 			<div class="form-group">
 				<label for="value" class="col-sm-2 control-label">Value</label>
 				<div class="col-sm-10">
-					<input type="text" th:field="*{value}" id="value" placeholder="Value" class="col-4" required
+					<input type="number" th:field="*{value}" id="value" placeholder="Value" class="col-4" required
 						   minlength="2" maxlength="45">
 					<p class="text-danger" th:if="${#fields.hasErrors('value')}" th:errors="*{value}"></p>
 				</div>
