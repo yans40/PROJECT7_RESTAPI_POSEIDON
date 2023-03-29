@@ -1,7 +1,6 @@
 C:\Users\A159YC\Openclassrooms\PROJECT7_RESTAPI_POSEIDON\Poseiden-skeleton\src\main\java\com\nnk\springboot\controllers\HomeController.java
 C:\Users\A159YC\Openclassrooms\PROJECT7_RESTAPI_POSEIDON\Poseiden-skeleton\src\main\java\com\nnk\springboot\service\RatingService.java
 C:\Users\A159YC\Openclassrooms\PROJECT7_RESTAPI_POSEIDON\Poseiden-skeleton\src\main\java\com\nnk\springboot\domain\Trade.java
-C:\Users\A159YC\Openclassrooms\PROJECT7_RESTAPI_POSEIDON\Poseiden-skeleton\src\main\java\com\nnk\springboot\controllers\LoginController.java
 C:\Users\A159YC\Openclassrooms\PROJECT7_RESTAPI_POSEIDON\Poseiden-skeleton\src\main\java\com\nnk\springboot\controllers\UserController.java
 C:\Users\A159YC\Openclassrooms\PROJECT7_RESTAPI_POSEIDON\Poseiden-skeleton\src\main\java\com\nnk\springboot\configuration\SecurityConfig.java
 C:\Users\A159YC\Openclassrooms\PROJECT7_RESTAPI_POSEIDON\Poseiden-skeleton\src\main\java\com\nnk\springboot\controllers\RatingController.java
@@ -25,6 +24,5 @@ C:\Users\A159YC\Openclassrooms\PROJECT7_RESTAPI_POSEIDON\Poseiden-skeleton\src\m
 C:\Users\A159YC\Openclassrooms\PROJECT7_RESTAPI_POSEIDON\Poseiden-skeleton\src\main\java\com\nnk\springboot\repositories\UserRepository.java
 C:\Users\A159YC\Openclassrooms\PROJECT7_RESTAPI_POSEIDON\Poseiden-skeleton\src\main\java\com\nnk\springboot\repositories\RuleNameRepository.java
 C:\Users\A159YC\Openclassrooms\PROJECT7_RESTAPI_POSEIDON\Poseiden-skeleton\src\main\java\com\nnk\springboot\service\UserService.java
-C:\Users\A159YC\Openclassrooms\PROJECT7_RESTAPI_POSEIDON\Poseiden-skeleton\src\main\java\com\nnk\springboot\service\OAuth2AuthorizedClientService.java
 C:\Users\A159YC\Openclassrooms\PROJECT7_RESTAPI_POSEIDON\Poseiden-skeleton\src\main\java\com\nnk\springboot\repositories\BidListRepository.java
 C:\Users\A159YC\Openclassrooms\PROJECT7_RESTAPI_POSEIDON\Poseiden-skeleton\src\main\java\com\nnk\springboot\domain\CurvePoint.java

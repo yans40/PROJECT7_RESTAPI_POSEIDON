@@ -3,6 +3,7 @@ package com.nnk.springboot.controllers;
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.service.BidListService;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.User;
@@ -41,8 +42,8 @@ public class BidListController {
             model.addAttribute("springUsername", token.getName()); // on récupère par la méthode getName le username
         }
         log.info("return la bidlist");
-        List<BidList> bidList = bidService.findAll();
-        model.addAttribute("bidList", bidList);
+        List<BidList> bidLists = bidService.findAll();
+        model.addAttribute("bidLists", bidLists);
         return "bidList/list";
     }
 
@@ -54,11 +55,11 @@ public class BidListController {
     }
 
     @PostMapping("/bidList/validate")
-    public String validate(@Valid BidList bidList, BindingResult result, Model model) {
+    public String validate(@Valid BidList bidList, @NotNull BindingResult result, Model model) {
         if (!result.hasErrors()) {
             bidService.save(bidList);
             log.info("bidList saved");
-            model.addAttribute("bidList", bidService.findAll());
+            model.addAttribute("bidLists", bidService.findAll());
             return "redirect:/bidList/list";
         }
         return "bidList/add";
@@ -66,7 +67,7 @@ public class BidListController {
     }
 
     @GetMapping("/bidList/update/{id}")
-    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+    public String showUpdateForm(@PathVariable("id") Integer id, @NotNull Model model) {
 
         BidList bidList = bidService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         model.addAttribute("bidList", bidList);
@@ -75,9 +76,9 @@ public class BidListController {
     }
 
     @PostMapping("/bidList/update/{id}")
-    public String updateBid(@PathVariable("id") Integer id, @Valid BidList bidList, BindingResult result, Model model) {
+    public String updateBid(@PathVariable("id") Integer id, @Valid BidList bidList, @NotNull BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "user/update";
+            return "bidList/update";
         }
         bidList.setAccount(bidList.getAccount());
         bidList.setType(bidList.getType());
@@ -90,7 +91,7 @@ public class BidListController {
     }
 
     @GetMapping("/bidList/delete/{id}")
-    public String deleteBid(@PathVariable("id") Integer id, Model model) {
+    public String deleteBid(@PathVariable("id") Integer id, @NotNull Model model) {
         BidList bidList = bidService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         bidService.delete(bidList);
         log.info("bidList deleted");

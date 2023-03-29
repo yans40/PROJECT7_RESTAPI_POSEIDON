@@ -3,7 +3,6 @@ com\nnk\springboot\service\BidListService.class
 com\nnk\springboot\service\TradeService.class
 com\nnk\springboot\controllers\RatingController.class
 com\nnk\springboot\domain\BidList.class
-com\nnk\springboot\controllers\LoginController.class
 com\nnk\springboot\service\MyUserDetailsService.class
 com\nnk\springboot\domain\Trade.class
 com\nnk\springboot\PoseidonApplication.class

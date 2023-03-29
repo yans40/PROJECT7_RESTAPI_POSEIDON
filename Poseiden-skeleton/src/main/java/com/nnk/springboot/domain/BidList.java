@@ -2,12 +2,9 @@ package com.nnk.springboot.domain;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Required;
 
 import javax.persistence.*;
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
-import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
@@ -19,48 +16,72 @@ public class BidList {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Integer id;
+
     @Column
     Integer BidListId;
+
     @Column
+    @NotBlank(message = "account is mandatory")
     String account;
+
     @Column
+    @NotBlank(message = "type is mandatory")
     String type;
+
     @Column
     Double bidQuantity;
+
     @Column
     Double askQuantity;
+
     @Column
     Double bid;
+
     @Column
     Double ask;
+
     @Column
     String benchmark;
+
     @Column
     Timestamp bidListDate;
+
     @Column
     String commentary;
+
     @Column
     String security;
+
     @Column
     String status;
+
     @Column
     String trader;
+
     @Column
     String book;
+
     @Column
     String creationName;
+
     @Column
     Timestamp creationDate;
+
     @Column
     String revisionName;
+
     @Column
     Timestamp revisionDate;
+
     @Column
     String dealName;
+
     @Column
     String dealType;
+
     @Column
     String sourceListId;
+
     @Column
     String side;
 

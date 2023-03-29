@@ -20,8 +20,10 @@ public class Trade {
     @Column
     Integer trade_Id;
     @Column
+    @NotBlank(message = "account is mandatory")
     String account;
     @Column
+    @NotBlank(message = "type is mandatory")
     String type;
     @Column
     Double buyQuantity;

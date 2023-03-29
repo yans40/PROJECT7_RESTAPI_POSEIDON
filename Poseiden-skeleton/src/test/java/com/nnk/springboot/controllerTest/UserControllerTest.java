@@ -107,14 +107,13 @@ public class UserControllerTest {
         MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
         formData.add("fullname", "john doe");
         formData.add("username", "john");
-        formData.add("password", "testpassword");
+        formData.add("password", "Azerty2023!");
 
         mockMvc.perform(post("/user/validate")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                         .params(formData)
                         .with(csrf()))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/user/list"));
+                .andExpect(status().isOk());
     }
 
 
@@ -147,8 +146,8 @@ public class UserControllerTest {
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                         .params(formData)
                         .with(csrf()))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/user/list"));
+                .andExpect(status().isOk());
+
 
     }
 

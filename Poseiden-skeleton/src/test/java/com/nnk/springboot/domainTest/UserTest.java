@@ -23,6 +23,7 @@ public class UserTest {
         User user = new User();
         user.setFullname("Alexandre Dumas");
         user.setUsername("Alex");
+        user.setPassword("Azerty2023*");
         user.setRole("user");
 
         //Save

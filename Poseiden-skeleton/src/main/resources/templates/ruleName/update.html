@@ -32,9 +32,9 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="description" class="col-sm-2 control-label">type</label>
+				<label for="description" class="col-sm-2 control-label">description</label>
 				<div class="col-sm-10">
-					<input type="text" th:field="*{description}" id="description" placeholder="type" class="col-4" required
+					<input type="text" th:field="*{description}" id="description" placeholder="description" class="col-4" required
 						   minlength="2" maxlength="80">
 					<p class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
 				</div>

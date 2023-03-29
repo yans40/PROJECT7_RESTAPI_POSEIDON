@@ -78,7 +78,7 @@ public class RuleNameController {
     public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleName ruleName,
                                  BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "rating/update";
+            return "ruleName/update";
         }
         ruleName.setId(id);
         ruleName.setName(ruleName.getName());
